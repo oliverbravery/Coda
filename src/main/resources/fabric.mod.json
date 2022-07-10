@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 1,
+  "id": "vanillaassistant",
+  "version": "${version}",
+
+  "name": "Vanilla Assistant Mod",
+  "description": "This mod adds client-side features intended to assist the player whilst keeping the game as vanilla as possible.",
+  "authors": [
+    "Oliver Bravery"
+  ],
+
+  "license": "CC0-1.0",
+  "icon": "assets/vanillaassistant/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.oliverbravery.vanillaassistant.VanillaAssistant"
+    ]
+  },
+  "mixins": [
+    "vanillaassistant.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.12.12",
+    "fabric": "*",
+    "minecraft": "1.19.x",
+    "java": ">=17",
+    "fabric-key-binding-api-v1": "*"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
