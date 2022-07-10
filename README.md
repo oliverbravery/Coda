@@ -1,5 +1,5 @@
 # Vanilla Assistant Mod
-### A client-side fabric minecraft modification to a assist you in your survival journey.
+### A client-side fabric Minecraft modification to assist players in their survival journey.
 -----
 ## Features
 - Elytra chestplate swap. (*hotkey* + *toggleable*)
