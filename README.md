@@ -1,4 +1,4 @@
-# Vanilla Assistant Mod
+# Coda
 ### A client-side fabric Minecraft modification to assist the player in their survival journey.
 -----
 ## Features
@@ -16,7 +16,7 @@
 
 ## Download
 The mod is available for download on the following services:
-- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/vanilla-assistant)
+- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/coda)
 
 ## Requirements
 The modification currently supports Minecraft version 1.19. It is a fabric mod so the fabric mod loader will need to be used. The mod requires java version 17 or higher alongside fabric loader version 0.12.12 or higher and fabric api version 0.55.3+1.19.
