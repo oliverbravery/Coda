@@ -6,11 +6,15 @@
   "name": "Coda",
   "description": "This mod adds client-side features intended to assist the player whilst keeping the game as vanilla as possible.",
   "authors": [
-    "Oliver Bravery"
+    {
+      "name": "Oliver Bravery", "contact": {
+      "homepage": "https://www.curseforge.com/minecraft/mc-mods/coda"
+    }
+    }
   ],
 
   "license": "MIT",
-  "icon": "assets/vanillaassistant/icon.png",
+  "icon": "assets/coda/icon.png",
 
   "environment": "*",
   "entrypoints": {
