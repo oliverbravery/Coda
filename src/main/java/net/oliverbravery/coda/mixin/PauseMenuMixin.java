@@ -1,5 +1,6 @@
 package net.oliverbravery.coda.mixin;
 
+import net.oliverbravery.coda.Coda;
 import net.oliverbravery.coda.CodaSettingsScreen;
 import net.minecraft.client.gui.screen.GameMenuScreen;
 import net.minecraft.client.gui.screen.Screen;
@@ -20,7 +21,7 @@ public class PauseMenuMixin extends Screen {
     @Inject(at = @At("HEAD"), method = "initWidgets")
     private void initWidgets(CallbackInfo info) {
         //10,10,90,20
-        this.addDrawableChild(new ButtonWidget(width/2 - 102,this.height / 4 + 144 + -16,204,20, Text.literal("§6Coda"), button -> {
+        this.addDrawableChild(new ButtonWidget(width/2 - 102, Coda.utils.SHOULD_COMPENSATE_FOR_MODMENU_BUTTON ? this.height / 4 + 168 + -16 : this.height / 4 + 144 + -16,204,20, Text.literal("§6Coda"), button -> {
             this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
         }));
     }

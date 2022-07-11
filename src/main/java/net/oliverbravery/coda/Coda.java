@@ -20,6 +20,7 @@ public class Coda implements ModInitializer {
 	public static net.oliverbravery.coda.SortInventory sortInventory = new SortInventory();
 	public static net.oliverbravery.coda.FastPlace fastPlace = new FastPlace();
 	public static MinecraftClient mc = MinecraftClient.getInstance();
+	public static Utils utils = new Utils();
 
 	@Override
 	public void onInitialize() {
