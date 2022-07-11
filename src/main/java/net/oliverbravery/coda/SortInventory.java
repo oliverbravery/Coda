@@ -1,22 +1,16 @@
-package net.oliverbravery.vanillaassistant;
+package net.oliverbravery.coda;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.fabricmc.tinyremapper.extension.mixin.hard.util.IdentityString;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.text.Text;
-import org.apache.commons.compress.harmony.unpack200.bytecode.ExceptionsAttribute;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.system.CallbackI;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
-import java.util.Set;
 
 public class SortInventory {
     private String filePath = "savedInventory.txt";
@@ -122,18 +116,18 @@ public class SortInventory {
     private void SetupKeybinds() {
         saveInventoryKeybind = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding(
-                        "key.vanillaassistantmod.saveinventory",
+                        "key.coda.saveinventory",
                         InputUtil.Type.KEYSYM,
                         GLFW.GLFW_KEY_P,
-                        "Vanilla Assistant Mod"
+                        "Coda"
                 ));
 
         sortInventoryKeybind = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding(
-                        "key.vanillaassistantmod.sortinventory",
+                        "key.coda.sortinventory",
                         InputUtil.Type.KEYSYM,
                         GLFW.GLFW_KEY_U,
-                        "Vanilla Assistant Mod"
+                        "Coda"
                 ));
     }
 }

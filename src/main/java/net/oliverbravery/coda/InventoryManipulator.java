@@ -1,4 +1,4 @@
-package net.oliverbravery.vanillaassistant;
+package net.oliverbravery.coda;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
-  "id": "vanillaassistant",
+  "id": "coda",
   "version": "${version}",
 
-  "name": "Vanilla Assistant Mod",
+  "name": "Coda",
   "description": "This mod adds client-side features intended to assist the player whilst keeping the game as vanilla as possible.",
   "authors": [
     "Oliver Bravery"
@@ -15,11 +15,11 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.oliverbravery.vanillaassistant.VanillaAssistant"
+      "net.oliverbravery.coda.Coda"
     ]
   },
   "mixins": [
-    "vanillaassistant.mixins.json"
+    "coda.mixins.json"
   ],
 
   "depends": {

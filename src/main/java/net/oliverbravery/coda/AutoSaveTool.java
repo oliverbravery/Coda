@@ -1,4 +1,4 @@
-package net.oliverbravery.vanillaassistant;
+package net.oliverbravery.coda;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
@@ -64,11 +64,11 @@ public class AutoSaveTool {
                         if(freeSlot != -1) {
                             if(freeSlot >= 0 && freeSlot <= 8) {
                                 freeSlot = 36 + freeSlot;
-                                net.oliverbravery.vanillaassistant.InventoryManipulator.swapSlots(slotNumber, freeSlot);
+                                net.oliverbravery.coda.InventoryManipulator.swapSlots(slotNumber, freeSlot);
                                 cpe.sendMessage(Text.literal("§6To prevent your tool from breaking it was moved from your hotbar."), false);
                             }
                             else {
-                                net.oliverbravery.vanillaassistant.InventoryManipulator.swapSlots(slotNumber, freeSlot);
+                                net.oliverbravery.coda.InventoryManipulator.swapSlots(slotNumber, freeSlot);
                                 cpe.sendMessage(Text.literal("§6To prevent your tool from breaking it was moved from your hotbar."), false);
                             }
                         }
@@ -77,11 +77,11 @@ public class AutoSaveTool {
                             if(freeSlot != -1) {
                                 if(freeSlot >= 0 && freeSlot <= 8) {
                                     freeSlot = 36 + freeSlot;
-                                    net.oliverbravery.vanillaassistant.InventoryManipulator.swapSlots(slotNumber, freeSlot);
+                                    net.oliverbravery.coda.InventoryManipulator.swapSlots(slotNumber, freeSlot);
                                     cpe.sendMessage(Text.literal("§6To prevent your tool from breaking it was moved from your hotbar."), false);
                                 }
                                 else {
-                                    net.oliverbravery.vanillaassistant.InventoryManipulator.swapSlots(slotNumber, freeSlot);
+                                    net.oliverbravery.coda.InventoryManipulator.swapSlots(slotNumber, freeSlot);
                                     cpe.sendMessage(Text.literal("§6To prevent your tool from breaking it was moved from your hotbar."), false);
                                 }
                             }
@@ -95,10 +95,10 @@ public class AutoSaveTool {
     public static void SetAutoSaveToolKeybind() {
         autoSaveToolKeybind = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding(
-                        "key.vanillaassistantmod.toggleautosavetool",
+                        "key.coda.toggleautosavetool",
                         InputUtil.Type.KEYSYM,
                         GLFW.GLFW_KEY_K,
-                        "Vanilla Assistant Mod"
+                        "Coda"
                 ));
     }
 }

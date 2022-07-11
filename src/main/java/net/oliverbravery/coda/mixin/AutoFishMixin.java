@@ -1,8 +1,9 @@
-package net.oliverbravery.vanillaassistant.mixin;
+package net.oliverbravery.coda.mixin;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.util.Hand;
+import net.oliverbravery.coda.Coda;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,11 +16,11 @@ public class AutoFishMixin {
     @Inject(at = @At("TAIL"), method = "onTrackedDataSet")
     public void onTrackedDataSet(CallbackInfo info) {
         MinecraftClient client = MinecraftClient.getInstance();
-        if(caughtFish && net.oliverbravery.vanillaassistant.VanillaAssistant.autoFish.autoFishEnabled) {
+        if(caughtFish && Coda.autoFish.autoFishEnabled) {
             //Withdraw  rod
             client.interactionManager.interactItem(client.player, Hand.MAIN_HAND);
-            net.oliverbravery.vanillaassistant.VanillaAssistant.LOGGER.info("Withdrew Rod");
-            net.oliverbravery.vanillaassistant.VanillaAssistant.autoFish.RecastRod();
+            Coda.LOGGER.info("Withdrew Rod");
+            Coda.autoFish.RecastRod();
         }
     }
 }

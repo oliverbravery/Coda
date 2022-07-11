@@ -1,4 +1,4 @@
-package net.oliverbravery.vanillaassistant;
+package net.oliverbravery.coda;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
@@ -31,10 +31,10 @@ public class SlotRandomiser {
     public static void SetRandomizeSlotKeybind() {
         randomiseSlotKeybind = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding(
-                "key.vanillaassistantmod.togglekeyrandomiser",
+                "key.coda.togglekeyrandomiser",
                 InputUtil.Type.KEYSYM,
                 GLFW.GLFW_KEY_R,
-                "Vanilla Assistant Mod"
+                "Coda"
         ));
     }
 }

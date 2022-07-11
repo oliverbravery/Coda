@@ -1,11 +1,10 @@
-package net.oliverbravery.vanillaassistant;
+package net.oliverbravery.coda;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
-import net.minecraft.client.util.math.Vector3d;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -67,10 +66,10 @@ public class FastPlace {
     public static void SetKeybind() {
         keybind = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding(
-                        "key.vanillaassistantmod.togglefastplace",
+                        "key.coda.togglefastplace",
                         InputUtil.Type.KEYSYM,
                         GLFW.GLFW_KEY_BACKSLASH,
-                        "Vanilla Assistant Mod"
+                        "Coda"
                 ));
     }
 }

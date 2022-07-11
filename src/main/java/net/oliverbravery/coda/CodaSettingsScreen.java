@@ -1,38 +1,36 @@
-package net.oliverbravery.vanillaassistant;
+package net.oliverbravery.coda;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ElementListWidget;
-import net.minecraft.client.gui.widget.SliderWidget;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import net.minecraft.util.Language;
 
-public class VanillaAssistantScreen extends Screen {
+public class CodaSettingsScreen extends Screen {
     private final Screen parent;
     private final GameOptions settings;
     private ElementListWidget elList;
 
-    public VanillaAssistantScreen(Screen parent, GameOptions gameOptions) {
-        super(Text.literal("Vanilla Assistant Mod"));
+    public CodaSettingsScreen(Screen parent, GameOptions gameOptions) {
+        super(Text.literal("Coda"));
         this.parent = parent;
         this.settings = gameOptions;
     }
     private void ToggleHotbarSlot(int slotNumber) {
         if(GetSlotStatus(slotNumber) == "Enabled") {
-            net.oliverbravery.vanillaassistant.VanillaAssistant.slotRandomiser.RemoveRandomSlot(slotNumber);
+            Coda.slotRandomiser.RemoveRandomSlot(slotNumber);
             //Change to Disabled
         }
         else {
-            net.oliverbravery.vanillaassistant.VanillaAssistant.slotRandomiser.AddRandomSlot(slotNumber);
+            Coda.slotRandomiser.AddRandomSlot(slotNumber);
             //change to Enabled
         }
-        this.client.setScreen(new VanillaAssistantScreen(this, this.client.options));
+        this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
     }
 
     private String GetSlotStatus(int slotNumber) {
-        var x = net.oliverbravery.vanillaassistant.VanillaAssistant.slotRandomiser.randomiseSlotKeyList;
+        var x = Coda.slotRandomiser.randomiseSlotKeyList;
         Boolean slotEnabled = false;
         for (var i: x) {
             if (i == slotNumber) {
@@ -48,7 +46,7 @@ public class VanillaAssistantScreen extends Screen {
     }
 
     private String GetAutoFishStatus() {
-        boolean autoFishStatus = net.oliverbravery.vanillaassistant.VanillaAssistant.autoFish.autoFishEnabled;
+        boolean autoFishStatus = Coda.autoFish.autoFishEnabled;
         if (autoFishStatus) {
             return "§aEnabled";
         } else {
@@ -57,7 +55,7 @@ public class VanillaAssistantScreen extends Screen {
     }
 
     private String GetAutoSaveToolStatus() {
-        boolean autoFishStatus = net.oliverbravery.vanillaassistant.VanillaAssistant.autoSaveTool.isEnabled;
+        boolean autoFishStatus = Coda.autoSaveTool.isEnabled;
         if (autoFishStatus) {
             return "§aEnabled";
         } else {
@@ -66,7 +64,7 @@ public class VanillaAssistantScreen extends Screen {
     }
 
     private String GetRandomizeSlotsStatus() {
-        boolean randomizeSlotsStatus = net.oliverbravery.vanillaassistant.VanillaAssistant.slotRandomiser.randomiseSlotsActive;
+        boolean randomizeSlotsStatus = Coda.slotRandomiser.randomiseSlotsActive;
         if (randomizeSlotsStatus) {
             return "§aEnabled";
         } else {
@@ -95,8 +93,8 @@ public class VanillaAssistantScreen extends Screen {
         this.addDrawableChild(new ButtonWidget(width / 2 - 70, this.height / 4 + 70 + -16,
                 140, 20, Text.literal(String.format("Randomize Slots : %s", GetRandomizeSlotsStatus())),
                 button -> {
-                    net.oliverbravery.vanillaassistant.VanillaAssistant.slotRandomiser.randomiseSlotsActive = !net.oliverbravery.vanillaassistant.VanillaAssistant.slotRandomiser.randomiseSlotsActive;
-                    this.client.setScreen(new VanillaAssistantScreen(this, this.client.options));
+                    Coda.slotRandomiser.randomiseSlotsActive = !Coda.slotRandomiser.randomiseSlotsActive;
+                    this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
     }
 
@@ -104,8 +102,8 @@ public class VanillaAssistantScreen extends Screen {
         this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 100 + -16,
                 110, 20, Text.literal(String.format("AutoFish : %s", GetAutoFishStatus())),
                 button -> {
-                    net.oliverbravery.vanillaassistant.VanillaAssistant.autoFish.autoFishEnabled = !net.oliverbravery.vanillaassistant.VanillaAssistant.autoFish.autoFishEnabled;
-                    this.client.setScreen(new VanillaAssistantScreen(this, this.client.options));
+                    Coda.autoFish.autoFishEnabled = !Coda.autoFish.autoFishEnabled;
+                    this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
     }
 
@@ -117,8 +115,8 @@ public class VanillaAssistantScreen extends Screen {
         this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 100 + -16,
                 110, 20, Text.literal(String.format("SaveTool : %s", GetAutoSaveToolStatus())),
                 button -> {
-                    net.oliverbravery.vanillaassistant.VanillaAssistant.autoSaveTool.isEnabled = !net.oliverbravery.vanillaassistant.VanillaAssistant.autoSaveTool.isEnabled;
-                    this.client.setScreen(new VanillaAssistantScreen(this, this.client.options));
+                    Coda.autoSaveTool.isEnabled = !Coda.autoSaveTool.isEnabled;
+                    this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
     }
 
@@ -126,12 +124,12 @@ public class VanillaAssistantScreen extends Screen {
         this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 130 + -16,
                 110, 20, Text.literal("Save Inventory"),
                 button -> {
-                    VanillaAssistant.sortInventory.AddInventory();
+                    Coda.sortInventory.AddInventory();
                 }));
         this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 130 + -16,
                 110, 20, Text.literal("Load Inventory"),
                 button -> {
-                    VanillaAssistant.sortInventory.LoadInventory();
+                    Coda.sortInventory.LoadInventory();
                 }));
     }
 

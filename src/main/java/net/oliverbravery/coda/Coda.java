@@ -1,4 +1,4 @@
-package net.oliverbravery.vanillaassistant;
+package net.oliverbravery.coda;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
@@ -8,17 +8,17 @@ import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class VanillaAssistant implements ModInitializer {
+public class Coda implements ModInitializer {
 	// This logger is used to write text to the console and the log file.
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
 	public static final Logger LOGGER = LoggerFactory.getLogger("modid");
-	public static net.oliverbravery.vanillaassistant.SlotRandomiser slotRandomiser = new net.oliverbravery.vanillaassistant.SlotRandomiser();
-	public static net.oliverbravery.vanillaassistant.AutoFish autoFish = new net.oliverbravery.vanillaassistant.AutoFish();
-	public static net.oliverbravery.vanillaassistant.ArmorSwap armorSwap = new net.oliverbravery.vanillaassistant.ArmorSwap();
-	public static net.oliverbravery.vanillaassistant.AutoSaveTool autoSaveTool = new net.oliverbravery.vanillaassistant.AutoSaveTool();
-	public static net.oliverbravery.vanillaassistant.SortInventory sortInventory = new SortInventory();
-	public static net.oliverbravery.vanillaassistant.FastPlace fastPlace = new FastPlace();
+	public static net.oliverbravery.coda.SlotRandomiser slotRandomiser = new net.oliverbravery.coda.SlotRandomiser();
+	public static net.oliverbravery.coda.AutoFish autoFish = new net.oliverbravery.coda.AutoFish();
+	public static net.oliverbravery.coda.ArmorSwap armorSwap = new net.oliverbravery.coda.ArmorSwap();
+	public static net.oliverbravery.coda.AutoSaveTool autoSaveTool = new net.oliverbravery.coda.AutoSaveTool();
+	public static net.oliverbravery.coda.SortInventory sortInventory = new SortInventory();
+	public static net.oliverbravery.coda.FastPlace fastPlace = new FastPlace();
 	public static MinecraftClient mc = MinecraftClient.getInstance();
 
 	@Override
