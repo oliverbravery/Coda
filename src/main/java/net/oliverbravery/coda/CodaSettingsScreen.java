@@ -5,6 +5,7 @@ import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ElementListWidget;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 
 public class CodaSettingsScreen extends Screen {
@@ -63,6 +64,24 @@ public class CodaSettingsScreen extends Screen {
         }
     }
 
+    private String GetAutoToolSwapStatus() {
+        boolean autoSwapToolsStatus = Coda.autoSwapTools.isEnabled;
+        if (autoSwapToolsStatus) {
+            return "§aEnabled";
+        } else {
+            return "§cDisabled";
+        }
+    }
+
+    private String GetCodaButtonStatus() {
+        boolean codaButtonStatus = Coda.codaButtonEnabled;
+        if (codaButtonStatus) {
+            return "§aEnabled";
+        } else {
+            return "§cDisabled";
+        }
+    }
+
     private String GetRandomizeSlotsStatus() {
         boolean randomizeSlotsStatus = Coda.slotRandomiser.randomiseSlotsActive;
         if (randomizeSlotsStatus) {
@@ -83,14 +102,14 @@ public class CodaSettingsScreen extends Screen {
                 numberForSlot = String.format("§c%s", i + 1);
             }
             int finalI = i;
-            this.addDrawableChild(new ButtonWidget(width / 2 - 112 + (25 * i), this.height / 4 + 40 + -16,
+            this.addDrawableChild(new ButtonWidget(width / 2 - 112 + (25 * i), this.height / 4 + 20 + -16,
                     25, 20, Text.literal(String.format("%s", numberForSlot)),
                     button -> {
                         ToggleHotbarSlot(finalI);
                     }));
         }
         //Toggle Button
-        this.addDrawableChild(new ButtonWidget(width / 2 - 70, this.height / 4 + 70 + -16,
+        this.addDrawableChild(new ButtonWidget(width / 2 - 70, this.height / 4 + 50 + -16,
                 140, 20, Text.literal(String.format("Randomize Slots : %s", GetRandomizeSlotsStatus())),
                 button -> {
                     Coda.slotRandomiser.randomiseSlotsActive = !Coda.slotRandomiser.randomiseSlotsActive;
@@ -99,7 +118,7 @@ public class CodaSettingsScreen extends Screen {
     }
 
     private void AddAutoFishButton() {
-        this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 100 + -16,
+        this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 80 + -16,
                 110, 20, Text.literal(String.format("AutoFish : %s", GetAutoFishStatus())),
                 button -> {
                     Coda.autoFish.autoFishEnabled = !Coda.autoFish.autoFishEnabled;
@@ -107,12 +126,8 @@ public class CodaSettingsScreen extends Screen {
                 }));
     }
 
-    private void AddArmorSwapButton() {
-
-    }
-
     private void AddAutoSaveToolButton() {
-        this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 100 + -16,
+        this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 80 + -16,
                 110, 20, Text.literal(String.format("SaveTool : %s", GetAutoSaveToolStatus())),
                 button -> {
                     Coda.autoSaveTool.isEnabled = !Coda.autoSaveTool.isEnabled;
@@ -121,15 +136,33 @@ public class CodaSettingsScreen extends Screen {
     }
 
     private void AddSavedInventoryScreenButton() {
-        this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 130 + -16,
+        this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 110 + -16,
                 110, 20, Text.literal("Save Inventory"),
                 button -> {
                     Coda.sortInventory.AddInventory();
                 }));
-        this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 130 + -16,
+        this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 110 + -16,
                 110, 20, Text.literal("Load Inventory"),
                 button -> {
                     Coda.sortInventory.LoadInventory();
+                }));
+    }
+
+    private void AddToolSwap() {
+        this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 140 + -16,
+                110, 20, Text.literal(String.format("ToolSwap : %s", GetAutoToolSwapStatus())),
+                button -> {
+                    Coda.autoSwapTools.isEnabled = !Coda.autoSwapTools.isEnabled;
+                    this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
+                }));
+    }
+
+    private void DisplayCodaButton() {
+        this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 140 + -16,
+                110, 20, Text.literal(String.format("CodaButton : %s", GetCodaButtonStatus())),
+                button -> {
+                    Coda.codaButtonEnabled = !Coda.codaButtonEnabled;
+                    this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
     }
 
@@ -138,10 +171,10 @@ public class CodaSettingsScreen extends Screen {
         matrices.push();
         matrices.scale(2.0F, 2.0F, 2.0F);
         if(this.height >= 240 && this.height <= 475) {
-            drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2 / 2, 25, 16777215);
+            drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2 / 2, 15, 16777215);
         }
         else {
-            drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2 / 2, 55, 16777215);
+            drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2 / 2, 45, 16777215);
         }
         matrices.pop();
 
@@ -157,8 +190,9 @@ public class CodaSettingsScreen extends Screen {
     protected void init() {
         AddHotbarRandomizerButtons();
         AddAutoFishButton();
-        AddArmorSwapButton();
         AddAutoSaveToolButton();
         AddSavedInventoryScreenButton();
+        AddToolSwap();
+        DisplayCodaButton();
     }
 }

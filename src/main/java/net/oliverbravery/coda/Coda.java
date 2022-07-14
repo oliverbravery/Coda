@@ -21,6 +21,9 @@ public class Coda implements ModInitializer {
 	public static net.oliverbravery.coda.FastPlace fastPlace = new FastPlace();
 	public static MinecraftClient mc = MinecraftClient.getInstance();
 	public static Utils utils = new Utils();
+	public static AutoSwapTools autoSwapTools = new AutoSwapTools();
+
+	public static boolean codaButtonEnabled = true;
 
 	@Override
 	public void onInitialize() {
@@ -31,6 +34,7 @@ public class Coda implements ModInitializer {
 		ClientTickEvents.END_CLIENT_TICK.register(autoFish::tick);
 		ClientTickEvents.END_CLIENT_TICK.register(autoSaveTool::tick);
 		ClientTickEvents.END_CLIENT_TICK.register(fastPlace::tick);
+		ClientTickEvents.END_CLIENT_TICK.register(autoSwapTools::tick);
 		ClientTickEvents.END_CLIENT_TICK.register(this::tick);
 	}
 
@@ -59,6 +63,9 @@ public class Coda implements ModInitializer {
 		}
 		if(fastPlace.keybind.wasPressed()) {
 			fastPlace.FastPlaceEnabled = !fastPlace.FastPlaceEnabled;
+		}
+		if(autoSwapTools.keybind.wasPressed()) {
+			autoSwapTools.isEnabled = !autoSwapTools.isEnabled;
 		}
 	}
 

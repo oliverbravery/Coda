@@ -21,6 +21,7 @@ public class PauseMenuMixin extends Screen {
     @Inject(at = @At("HEAD"), method = "initWidgets")
     private void initWidgets(CallbackInfo info) {
         //10,10,90,20
+        if(Coda.codaButtonEnabled)
         this.addDrawableChild(new ButtonWidget(width/2 - 102, Coda.utils.SHOULD_COMPENSATE_FOR_MODMENU_BUTTON ? this.height / 4 + 168 + -16 : this.height / 4 + 144 + -16,204,20, Text.literal("§6Coda"), button -> {
             this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
         }));

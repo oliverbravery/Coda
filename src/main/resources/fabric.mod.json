@@ -21,6 +21,9 @@
   "entrypoints": {
     "main": [
       "net.oliverbravery.coda.Coda"
+    ],
+    "modmenu": [
+      "net.oliverbravery.coda.ModMenuIntegration"
     ]
   },
   "mixins": [

@@ -5,5 +5,7 @@
   "key.coda.toggleautosavetool": "Toggle Auto Save Tool",
   "key.coda.armorswap": "Swap Chestplate And Elytra",
   "key.coda.saveinventory": "Save Inventory",
-  "key.coda.sortinventory": "Sort Inventory"
+  "key.coda.sortinventory": "Sort Inventory",
+  "key.coda.toolswap": "Auto Tool Swap",
+  "options.coda.title" : "Coda"
 }
