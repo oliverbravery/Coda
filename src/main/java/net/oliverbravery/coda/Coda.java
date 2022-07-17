@@ -56,6 +56,13 @@ public class Coda implements ClientModInitializer {
 		ClientTickEvents.END_CLIENT_TICK.register(autoSwapTools::tick);
 		ClientTickEvents.END_CLIENT_TICK.register(this::tick);
 		LoadSettings();
+
+		ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
+			dispatcher.register(
+					literal("coda")
+						.then(literal("button")
+							.then(literal("toggle").executes(ctx -> {codaButtonEnabled = !codaButtonEnabled; return 1;}))));
+		});
 	}
 
 	public void LoadSettings() {
