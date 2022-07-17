@@ -17,6 +17,7 @@ public class CodaSettingsScreen extends Screen {
         super(Text.literal("Coda"));
         this.parent = parent;
         this.settings = gameOptions;
+        Coda.SaveSettings();
     }
     private void ToggleHotbarSlot(int slotNumber) {
         if(GetSlotStatus(slotNumber) == "Enabled") {
@@ -127,12 +128,13 @@ public class CodaSettingsScreen extends Screen {
     }
 
     private void AddAutoSaveToolButton() {
-        this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 80 + -16,
+        var x = this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 80 + -16,
                 110, 20, Text.literal(String.format("SaveTool : %s", GetAutoSaveToolStatus())),
                 button -> {
                     Coda.autoSaveTool.isEnabled = !Coda.autoSaveTool.isEnabled;
                     this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
+        if(Coda.utils.SWITCHEROO_INSTALLED) {x.active = false;}
     }
 
     private void AddSavedInventoryScreenButton() {
@@ -149,12 +151,13 @@ public class CodaSettingsScreen extends Screen {
     }
 
     private void AddToolSwap() {
-        this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 140 + -16,
+        var x = this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 140 + -16,
                 110, 20, Text.literal(String.format("ToolSwap : %s", GetAutoToolSwapStatus())),
                 button -> {
                     Coda.autoSwapTools.isEnabled = !Coda.autoSwapTools.isEnabled;
                     this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
+        if(Coda.utils.SWITCHEROO_INSTALLED) {x.active = false;}
     }
 
     private void DisplayCodaButton() {

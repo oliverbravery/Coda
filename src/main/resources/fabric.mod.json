@@ -17,9 +17,9 @@
   "license": "MIT",
   "icon": "assets/coda/icon.png",
 
-  "environment": "*",
+  "environment": "client",
   "entrypoints": {
-    "main": [
+    "client": [
       "net.oliverbravery.coda.Coda"
     ],
     "modmenu": [

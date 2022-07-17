@@ -20,6 +20,8 @@ public class AutoSwapTools {
     public boolean isEnabled = false;
     public static KeyBinding keybind;
     public AutoSwapTools() { SetKeybind(); }
+    public static int slotToSwitchBack = -1;
+    public static boolean swapInProgress = false;
 
     public void FindBestTool(BlockState blockState, MinecraftClient mc) {
         if(mc.player != null) {
@@ -28,13 +30,35 @@ public class AutoSwapTools {
             Inventory inv = mc.player.getInventory();
             for (int i = 0; i < inv.size(); i++) {
                 if(inv.getStack(i).getMiningSpeedMultiplier(blockState) > bestSpeed) {
-                    bestSlot = i;
-                    bestSpeed = inv.getStack(i).getMiningSpeedMultiplier(blockState);
+                    if(Coda.autoSaveTool.isEnabled && inv.getStack(i).isDamageable()) {
+                        int remaining = inv.getStack(i).getMaxDamage() - inv.getStack(i).getDamage();
+                        if(remaining > 5) {
+                            bestSlot = i;
+                            bestSpeed = inv.getStack(i).getMiningSpeedMultiplier(blockState);
+                        }
+                    }
+                    else {
+                        bestSlot = i;
+                        bestSpeed = inv.getStack(i).getMiningSpeedMultiplier(blockState);
+                    }
                 }
             }
             int destSlot = mc.player.getInventory().selectedSlot;
-            if(destSlot < 9) {destSlot += 36;}
-            InventoryManipulator.swapSlots(bestSlot, destSlot);
+            if(bestSlot >= 0 && bestSlot <= 8) {
+                mc.player.getInventory().selectedSlot = bestSlot;
+            }
+            else {
+                //Not in hotbar
+                if(swapInProgress && bestSlot != mc.player.getInventory().selectedSlot) {
+                    if(destSlot < 9) {destSlot += 36;}
+                    InventoryManipulator.swapSlots(slotToSwitchBack, destSlot);
+                    swapInProgress = false;
+                }
+                slotToSwitchBack = bestSlot;
+                swapInProgress = true;
+                if(destSlot < 9) {destSlot += 36;}
+                InventoryManipulator.swapSlots(bestSlot, destSlot);
+            }
         }
     }
 
@@ -45,6 +69,14 @@ public class AutoSwapTools {
             BlockPos blockPos = new BlockPos(((BlockHitResult) rayTrace).getBlockPos());
             BlockState blockState = client.world.getBlockState(blockPos);
             FindBestTool(blockState, client);
+        }
+        else {
+            if(client.player != null && !client.interactionManager.isBreakingBlock() && swapInProgress) {
+                int destSlot = client.player.getInventory().selectedSlot;
+                if(destSlot < 9) {destSlot += 36;}
+                InventoryManipulator.swapSlots(slotToSwitchBack, destSlot);
+                swapInProgress = false;
+            }
         }
     }
 
