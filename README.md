@@ -14,6 +14,8 @@
 
 - Auto fish ~ automatically casts and reels in fishing rod. (*hotkey* + *toggleable*)
 
+- Auto swap tool ~ when breaking a block, the best tool will be chosen automatically. (*hotkey* + *toggleable*)
+
 ## Download
 The mod is available for download on the following services:
 - [CurseForge](https://www.curseforge.com/minecraft/mc-mods/coda)
