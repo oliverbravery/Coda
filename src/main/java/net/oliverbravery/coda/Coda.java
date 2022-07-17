@@ -59,7 +59,7 @@ public class Coda implements ClientModInitializer {
 
 		ClientCommandRegistrationCallback.EVENT.register((dispatcher, registryAccess) -> {
 			dispatcher.register(
-					literal("coda")
+					literal("coda").executes(Commands::OpenCodaMenu)
 						.then(literal("button")
 							.then(literal("toggle").executes(ctx -> {codaButtonEnabled = !codaButtonEnabled; return 1;}))));
 		});
