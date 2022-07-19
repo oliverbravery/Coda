@@ -28,5 +28,5 @@ The mod is available for download on the following services:
 ## Requirements
 The modification currently supports Minecraft version 1.19. It is a fabric mod so the fabric mod loader will need to be used. The mod requires java version 17 or higher alongside fabric loader version 0.12.12 or higher and fabric api version 0.55.3+1.19.
 
-##Support
+## Support
 The mod supports both the "mod menu" fabric modification and the "switcheroo" modification. When the "mod menu" mod is detected the Coda button will be repositioned to allow room for the button. When the "switcheroo" modification is present, the "save tool" and "auto tool" features will be disabled as these modes are incompatible with "switcheroo".
