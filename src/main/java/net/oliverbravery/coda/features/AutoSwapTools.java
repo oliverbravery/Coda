@@ -1,19 +1,16 @@
-package net.oliverbravery.coda;
+package net.oliverbravery.coda.features;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.CropBlock;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.inventory.Inventory;
-import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
+import net.oliverbravery.coda.Coda;
+import net.oliverbravery.coda.utilities.InventoryManipulator;
 import org.lwjgl.glfw.GLFW;
 
 public class AutoSwapTools {

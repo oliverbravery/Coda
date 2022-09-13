@@ -12,7 +12,8 @@
   ],
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/coda",
-    "sources": "https://github.com/oliverbravery/Coda"
+    "sources": "https://github.com/oliverbravery/Coda",
+    "issues": "https://www.curseforge.com/minecraft/mc-mods/coda"
   },
   "license": "MIT",
   "icon": "assets/coda/icon.png",
@@ -23,7 +24,7 @@
       "net.oliverbravery.coda.Coda"
     ],
     "modmenu": [
-      "net.oliverbravery.coda.ModMenuIntegration"
+      "net.oliverbravery.coda.utilities.ModMenuIntegration"
     ]
   },
   "mixins": [

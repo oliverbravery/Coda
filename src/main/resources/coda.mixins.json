@@ -8,7 +8,8 @@
   "client": [
     "HotbarRandomiseMixin",
     "PauseMenuMixin",
-    "AutoFishMixin"
+    "AutoFishMixin",
+    "ShulkerBoxScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

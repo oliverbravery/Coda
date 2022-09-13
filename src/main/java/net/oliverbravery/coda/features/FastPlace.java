@@ -1,4 +1,4 @@
-package net.oliverbravery.coda;
+package net.oliverbravery.coda.features;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.block.BlockState;
@@ -57,10 +57,6 @@ public class FastPlace {
             }
         }
 
-    }
-
-    public boolean HasBlockInHand() {
-        return true;
     }
 
     public static void SetKeybind() {

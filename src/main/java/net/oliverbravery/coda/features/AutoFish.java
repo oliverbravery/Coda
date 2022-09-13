@@ -1,4 +1,4 @@
-package net.oliverbravery.coda;
+package net.oliverbravery.coda.features;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;

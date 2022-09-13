@@ -1,7 +1,7 @@
 package net.oliverbravery.coda.mixin;
 
 import net.oliverbravery.coda.Coda;
-import net.oliverbravery.coda.SlotRandomiser;
+import net.oliverbravery.coda.features.SlotRandomiser;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;

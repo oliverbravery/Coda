@@ -1,12 +1,13 @@
-package net.oliverbravery.coda;
+package net.oliverbravery.coda.screens;
 
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ElementListWidget;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.math.MatrixStack;
-import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
+import net.oliverbravery.coda.Coda;
+import net.oliverbravery.coda.config.Config;
 
 public class CodaSettingsScreen extends Screen {
     private final Screen parent;
@@ -17,7 +18,6 @@ public class CodaSettingsScreen extends Screen {
         super(Text.literal("Coda"));
         this.parent = parent;
         this.settings = gameOptions;
-        Coda.SaveSettings();
     }
     private void ToggleHotbarSlot(int slotNumber) {
         if(GetSlotStatus(slotNumber) == "Enabled") {
@@ -123,6 +123,7 @@ public class CodaSettingsScreen extends Screen {
                 110, 20, Text.literal(String.format("AutoFish : %s", GetAutoFishStatus())),
                 button -> {
                     Coda.autoFish.autoFishEnabled = !Coda.autoFish.autoFishEnabled;
+                    Config.SetValue("AutoFishEnabled", Boolean.toString(Coda.autoFish.autoFishEnabled));
                     this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
     }
@@ -132,6 +133,7 @@ public class CodaSettingsScreen extends Screen {
                 110, 20, Text.literal(String.format("SaveTool : %s", GetAutoSaveToolStatus())),
                 button -> {
                     Coda.autoSaveTool.isEnabled = !Coda.autoSaveTool.isEnabled;
+                    Config.SetValue("AutoSaveToolEnabled", Boolean.toString(Coda.autoSaveTool.isEnabled));
                     this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
         if(Coda.utils.SWITCHEROO_INSTALLED) {x.active = false;}
@@ -155,6 +157,7 @@ public class CodaSettingsScreen extends Screen {
                 110, 20, Text.literal(String.format("ToolSwap : %s", GetAutoToolSwapStatus())),
                 button -> {
                     Coda.autoSwapTools.isEnabled = !Coda.autoSwapTools.isEnabled;
+                    Config.SetValue("AutoSwapToolsEnabled", Boolean.toString(Coda.autoSwapTools.isEnabled));
                     this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
         if(Coda.utils.SWITCHEROO_INSTALLED) {x.active = false;}
@@ -165,6 +168,7 @@ public class CodaSettingsScreen extends Screen {
                 110, 20, Text.literal(String.format("CodaButton : %s", GetCodaButtonStatus())),
                 button -> {
                     Coda.codaButtonEnabled = !Coda.codaButtonEnabled;
+                    Config.SetValue("CodaButtonEnabled", Boolean.toString(Coda.codaButtonEnabled));
                     this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
     }

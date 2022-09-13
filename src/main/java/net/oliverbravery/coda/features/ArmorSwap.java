@@ -1,4 +1,4 @@
-package net.oliverbravery.coda;
+package net.oliverbravery.coda.features;
 
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
@@ -9,6 +9,9 @@ import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.player.PlayerInventory;
+import net.oliverbravery.coda.Coda;
+import net.oliverbravery.coda.utilities.InventoryManipulator;
+import net.oliverbravery.coda.utilities.Utils;
 import org.lwjgl.glfw.GLFW;
 
 @Environment(EnvType.CLIENT)
@@ -55,31 +58,31 @@ public class ArmorSwap {
                 if(chestItemName.toUpperCase().contains("ELYTRA")) {
                     //if wearing elytra
                     //move the chestplate on and elytra off
-                    net.oliverbravery.coda.InventoryManipulator.swapSlots(chestplateSlot, 6);
-                    Coda.SendChatMessage("§6Now wearing your §2chestplate");
+                    InventoryManipulator.swapSlots(chestplateSlot, 6);
+                    Utils.SendChatMessage("§6Now wearing your §2chestplate");
                 }
                 else {
                     //if wearing other
                     //move the elytra on and chestplate off
-                    net.oliverbravery.coda.InventoryManipulator.swapSlots(elytraSlot, 6);
-                    Coda.SendChatMessage("§6Now wearing your §2elytra");
+                    InventoryManipulator.swapSlots(elytraSlot, 6);
+                    Utils.SendChatMessage("§6Now wearing your §2elytra");
                 }
             }
             else {
-                net.oliverbravery.coda.InventoryManipulator.swapSlots(elytraSlot, 6);
-                Coda.SendChatMessage("§6Now wearing your §2elytra");
+                InventoryManipulator.swapSlots(elytraSlot, 6);
+                Utils.SendChatMessage("§6Now wearing your §2elytra");
             }
         }
         else if(elytraSlot != -1) {
-            net.oliverbravery.coda.InventoryManipulator.swapSlots(elytraSlot, 6);
-            Coda.SendChatMessage("§6Now wearing your §2elytra");
+            InventoryManipulator.swapSlots(elytraSlot, 6);
+            Utils.SendChatMessage("§6Now wearing your §2elytra");
         }
         else if(chestplateSlot != -1) {
-            net.oliverbravery.coda.InventoryManipulator.swapSlots(chestplateSlot, 6);
-            Coda.SendChatMessage("§6Now wearing your §2chestplate");
+            InventoryManipulator.swapSlots(chestplateSlot, 6);
+            Utils.SendChatMessage("§6Now wearing your §2chestplate");
         }
         else {
-            Coda.SendChatMessage("§4Could not find any chest armor to equip!");
+            Utils.SendChatMessage("§4Could not find any chest armor to equip!");
         }
     }
 

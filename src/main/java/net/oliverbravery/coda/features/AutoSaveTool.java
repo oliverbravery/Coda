@@ -1,4 +1,4 @@
-package net.oliverbravery.coda;
+package net.oliverbravery.coda.features;
 
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.MinecraftClient;
@@ -9,10 +9,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.oliverbravery.coda.utilities.InventoryManipulator;
 import org.lwjgl.glfw.GLFW;
 
 public class AutoSaveTool {
-    boolean isEnabled = true;
+    public boolean isEnabled = true;
     public static KeyBinding autoSaveToolKeybind;
 
     public AutoSaveTool() {
@@ -64,11 +65,11 @@ public class AutoSaveTool {
                         if(freeSlot != -1) {
                             if(freeSlot >= 0 && freeSlot <= 8) {
                                 freeSlot = 36 + freeSlot;
-                                net.oliverbravery.coda.InventoryManipulator.swapSlots(slotNumber, freeSlot);
+                                InventoryManipulator.swapSlots(slotNumber, freeSlot);
                                 cpe.sendMessage(Text.literal("§6To prevent your tool from breaking it was moved from your hotbar."), false);
                             }
                             else {
-                                net.oliverbravery.coda.InventoryManipulator.swapSlots(slotNumber, freeSlot);
+                                InventoryManipulator.swapSlots(slotNumber, freeSlot);
                                 cpe.sendMessage(Text.literal("§6To prevent your tool from breaking it was moved from your hotbar."), false);
                             }
                         }
@@ -77,11 +78,11 @@ public class AutoSaveTool {
                             if(freeSlot != -1) {
                                 if(freeSlot >= 0 && freeSlot <= 8) {
                                     freeSlot = 36 + freeSlot;
-                                    net.oliverbravery.coda.InventoryManipulator.swapSlots(slotNumber, freeSlot);
+                                    InventoryManipulator.swapSlots(slotNumber, freeSlot);
                                     cpe.sendMessage(Text.literal("§6To prevent your tool from breaking it was moved from your hotbar."), false);
                                 }
                                 else {
-                                    net.oliverbravery.coda.InventoryManipulator.swapSlots(slotNumber, freeSlot);
+                                    InventoryManipulator.swapSlots(slotNumber, freeSlot);
                                     cpe.sendMessage(Text.literal("§6To prevent your tool from breaking it was moved from your hotbar."), false);
                                 }
                             }
