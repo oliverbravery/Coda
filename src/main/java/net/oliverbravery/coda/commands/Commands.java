@@ -21,12 +21,10 @@ public class Commands {
                     literal("coda").executes(Commands::OpenCodaMenu)
                             .then(literal("button")
                                     .then(literal("toggle").executes(ctx -> {
-                                        Coda.codaButtonEnabled = !Coda.codaButtonEnabled;
-                                        Config.SetValue("CodaButtonEnabled", String.valueOf(Coda.codaButtonEnabled)); return 1;})))
+                                        Config.SetValue("CodaButtonEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("CodaButtonEnabled", "true"))));return 1;})))
                             .then(literal("ShulkerBox")
                                     .then(literal("Unloader")
-                                            .then(literal("toggle").executes(ctx -> {Coda.shulkerBoxUnloadEnabled = !Coda.shulkerBoxUnloadEnabled;
-                                                Config.SetValue("ShulkerBoxUnloadEnabled", String.valueOf(Coda.shulkerBoxUnloadEnabled)); return 1;}))))
+                                            .then(literal("toggle").executes(ctx -> {Config.SetValue("ShulkerBoxUnloadEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("ShulkerBoxUnloadEnabled", "true")))); return 1;}))))
                     );
         });
     }

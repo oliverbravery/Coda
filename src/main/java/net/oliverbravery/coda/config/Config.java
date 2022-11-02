@@ -1,10 +1,6 @@
 package net.oliverbravery.coda.config;
-
-import net.oliverbravery.coda.Coda;
 import net.oliverbravery.coda.utilities.Utils;
-
 import java.io.*;
-import java.lang.reflect.Field;
 
 public class Config {
     public static String configPath = "config/CodaConfig.config";
@@ -21,14 +17,9 @@ public class Config {
     }
 
     public void LoadConfigSettings() {
-        Coda.autoFish.autoFishEnabled = Boolean.parseBoolean(Config.GetValue("AutoFishEnabled", "true"));
-        Coda.autoSaveTool.isEnabled  = Boolean.parseBoolean(Config.GetValue("AutoSaveToolEnabled", "true"));
-        Coda.autoSwapTools.isEnabled = Boolean.parseBoolean(Config.GetValue("AutoSwapToolsEnabled", "true"));
-        Coda.codaButtonEnabled = Boolean.parseBoolean(Config.GetValue("CodaButtonEnabled", "true"));
-        Coda.shulkerBoxUnloadEnabled = Boolean.parseBoolean(Config.GetValue("ShulkerBoxUnloadEnabled", "true"));
         if(Utils.SWITCHEROO_INSTALLED) {
-            Coda.autoSwapTools.isEnabled = false;
-            Coda.autoSaveTool.isEnabled = false;
+            Config.SetValue("AutoSwapToolsEnabled", "false");
+            Config.SetValue("AutoSaveToolEnabled", "false");
         }
     }
 

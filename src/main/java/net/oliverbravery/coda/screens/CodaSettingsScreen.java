@@ -48,7 +48,7 @@ public class CodaSettingsScreen extends Screen {
     }
 
     private String GetAutoFishStatus() {
-        boolean autoFishStatus = Coda.autoFish.autoFishEnabled;
+        boolean autoFishStatus = Boolean.parseBoolean(Config.GetValue("AutoFishEnabled", "true"));
         if (autoFishStatus) {
             return "§aEnabled";
         } else {
@@ -57,8 +57,8 @@ public class CodaSettingsScreen extends Screen {
     }
 
     private String GetAutoSaveToolStatus() {
-        boolean autoFishStatus = Coda.autoSaveTool.isEnabled;
-        if (autoFishStatus) {
+        boolean autoSaveToolStatus = Boolean.parseBoolean(Config.GetValue("AutoSaveToolEnabled", "true"));
+        if (autoSaveToolStatus) {
             return "§aEnabled";
         } else {
             return "§cDisabled";
@@ -66,7 +66,7 @@ public class CodaSettingsScreen extends Screen {
     }
 
     private String GetAutoToolSwapStatus() {
-        boolean autoSwapToolsStatus = Coda.autoSwapTools.isEnabled;
+        boolean autoSwapToolsStatus = Boolean.parseBoolean(Config.GetValue("AutoSwapToolsEnabled", "true"));
         if (autoSwapToolsStatus) {
             return "§aEnabled";
         } else {
@@ -75,7 +75,7 @@ public class CodaSettingsScreen extends Screen {
     }
 
     private String GetCodaButtonStatus() {
-        boolean codaButtonStatus = Coda.codaButtonEnabled;
+        boolean codaButtonStatus = Boolean.parseBoolean(Config.GetValue("CodaButtonEnabled","true"));
         if (codaButtonStatus) {
             return "§aEnabled";
         } else {
@@ -122,8 +122,7 @@ public class CodaSettingsScreen extends Screen {
         this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 80 + -16,
                 110, 20, Text.literal(String.format("AutoFish : %s", GetAutoFishStatus())),
                 button -> {
-                    Coda.autoFish.autoFishEnabled = !Coda.autoFish.autoFishEnabled;
-                    Config.SetValue("AutoFishEnabled", Boolean.toString(Coda.autoFish.autoFishEnabled));
+                    Config.SetValue("AutoFishEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoFishEnabled", "true"))));
                     this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
     }
@@ -132,8 +131,7 @@ public class CodaSettingsScreen extends Screen {
         var x = this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 80 + -16,
                 110, 20, Text.literal(String.format("SaveTool : %s", GetAutoSaveToolStatus())),
                 button -> {
-                    Coda.autoSaveTool.isEnabled = !Coda.autoSaveTool.isEnabled;
-                    Config.SetValue("AutoSaveToolEnabled", Boolean.toString(Coda.autoSaveTool.isEnabled));
+                    Config.SetValue("AutoSaveToolEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSaveToolEnabled", "true"))));
                     this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
         if(Coda.utils.SWITCHEROO_INSTALLED) {x.active = false;}
@@ -156,8 +154,7 @@ public class CodaSettingsScreen extends Screen {
         var x = this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 140 + -16,
                 110, 20, Text.literal(String.format("ToolSwap : %s", GetAutoToolSwapStatus())),
                 button -> {
-                    Coda.autoSwapTools.isEnabled = !Coda.autoSwapTools.isEnabled;
-                    Config.SetValue("AutoSwapToolsEnabled", Boolean.toString(Coda.autoSwapTools.isEnabled));
+                    Config.SetValue("AutoSwapToolsEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSwapToolsEnabled", "true"))));
                     this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
         if(Coda.utils.SWITCHEROO_INSTALLED) {x.active = false;}
@@ -167,8 +164,7 @@ public class CodaSettingsScreen extends Screen {
         this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 140 + -16,
                 110, 20, Text.literal(String.format("CodaButton : %s", GetCodaButtonStatus())),
                 button -> {
-                    Coda.codaButtonEnabled = !Coda.codaButtonEnabled;
-                    Config.SetValue("CodaButtonEnabled", Boolean.toString(Coda.codaButtonEnabled));
+                    Config.SetValue("CodaButtonEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("CodaButtonEnabled", "true"))));
                     this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
     }

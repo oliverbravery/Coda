@@ -30,9 +30,6 @@ public class Coda implements ClientModInitializer {
 	public static Utils utils = new Utils();
 	public static AutoSwapTools autoSwapTools = new AutoSwapTools();
 
-	public static boolean codaButtonEnabled = true;
-	public static boolean shulkerBoxUnloadEnabled = true;
-
 	@Override
 	public void onInitializeClient() {
 		ClientTickEvents.END_CLIENT_TICK.register(autoFish::tick);
@@ -48,15 +45,13 @@ public class Coda implements ClientModInitializer {
 		//Checks for keybinds pressed
 		if(autoSaveTool.autoSaveToolKeybind.wasPressed()) {
 			if(!Utils.SWITCHEROO_INSTALLED) {
-				Config.SetValue("AutoSaveToolEnabled", String.valueOf(!autoSaveTool.isEnabled));
-				autoSaveTool.isEnabled = !autoSaveTool.isEnabled;
-				Utils.SendChatMessage(String.format("§6Auto Save Tool has been toggled to §6%s",  autoSaveTool.isEnabled));
+				Config.SetValue("AutoSaveToolEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSaveToolEnabled", "true"))));
+				Utils.SendChatMessage(String.format("§6Auto Save Tool has been toggled to §6%s", Config.GetValue("AutoSaveToolEnabled", "true")));
 			}
 		}
 		if(autoFish.autoFishKeybind.wasPressed()) {
-			Config.SetValue("AutoFishEnabled", String.valueOf(!autoFish.autoFishEnabled));
-			autoFish.autoFishEnabled = !autoFish.autoFishEnabled;
-			Utils.SendChatMessage(String.format("§6Auto Fish has been toggled to §6%s",  autoFish.autoFishEnabled));
+			Config.SetValue("AutoFishEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoFishEnabled", "true"))));
+			Utils.SendChatMessage(String.format("§6Auto Fish has been toggled to §6%s", Config.GetValue("AutoFishEnabled", "true")));
 		}
 		if(slotRandomiser.randomiseSlotKeybind.wasPressed()) {
 			slotRandomiser.randomiseSlotsActive = !slotRandomiser.randomiseSlotsActive;
@@ -76,8 +71,7 @@ public class Coda implements ClientModInitializer {
 		}
 		if(autoSwapTools.keybind.wasPressed()) {
 			if(!Utils.SWITCHEROO_INSTALLED) {
-				Config.SetValue("AutoSwapToolsEnabled", String.valueOf(!autoSwapTools.isEnabled));
-				autoSwapTools.isEnabled = !autoSwapTools.isEnabled;
+				Config.SetValue("AutoSwapToolsEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSwapToolsEnabled", "true"))));
 			}
 		}
 	}

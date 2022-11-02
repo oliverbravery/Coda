@@ -11,7 +11,6 @@ public class AutoFish {
     private int count = 0;
     private int waitTime = 10;
     private boolean shouldRecast = false;
-    public boolean autoFishEnabled = true;
     public static KeyBinding autoFishKeybind;
 
     public AutoFish() {

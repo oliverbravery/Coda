@@ -9,11 +9,11 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
+import net.oliverbravery.coda.config.Config;
 import net.oliverbravery.coda.utilities.InventoryManipulator;
 import org.lwjgl.glfw.GLFW;
 
 public class AutoSaveTool {
-    public boolean isEnabled = true;
     public static KeyBinding autoSaveToolKeybind;
 
     public AutoSaveTool() {
@@ -49,7 +49,7 @@ public class AutoSaveTool {
     }
 
     public void tick(MinecraftClient client) {
-        if(isEnabled) {
+        if(Boolean.parseBoolean(Config.GetValue("AutoSaveToolEnabled","true"))) {
             MinecraftClient mc = MinecraftClient.getInstance();
             PlayerEntity player = mc.player;
             if(player != null) {
