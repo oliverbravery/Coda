@@ -8,6 +8,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.VillagerEntity;
 import net.minecraft.network.packet.c2s.play.HandSwingC2SPacket;
+import net.minecraft.text.Text;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -129,12 +130,10 @@ public class LibrarianBookTrade {
     private  static void UpdateStatus(boolean mode){
         if(mode) {
             attemptCount++;
-            Utils.SendActionBarMessage(String.format("Searching for %s book trade\nAttempts so far: %s",
-                    wantedEnchant.getTranslationKey(), attemptCount));
+            Utils.SendActionBarMessage(String.format("Searching for book - attempts so far: %s", attemptCount));
         }
         else{
-            Utils.SendActionBarMessage(String.format("successfully found %s book trade\nAttempts: %s",
-                    wantedEnchant.getTranslationKey(), attemptCount));
+            Utils.SendActionBarMessage(String.format("found book in %s attempts", attemptCount));
         }
     }
 
@@ -187,7 +186,6 @@ public class LibrarianBookTrade {
                 }
             }
         }
-        Utils.SendChatMessage(String.format("%s",lecternPos));
         return lecternPos;
     }
 

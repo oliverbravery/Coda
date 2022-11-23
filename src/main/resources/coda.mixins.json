@@ -10,7 +10,8 @@
     "PauseMenuMixin",
     "AutoFishMixin",
     "ShulkerBoxScreenMixin",
-    "ClientConnectionMixin"
+    "ClientConnectionMixin",
+    "ItemEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1

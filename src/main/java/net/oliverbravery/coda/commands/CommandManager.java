@@ -29,5 +29,6 @@ public class CommandManager implements ClientModInitializer {
         SlotRandomiserCommand.register(dispatcher);
         ShulkerBoxUnloaderCommand.register(dispatcher);
         CodaMenuButtonCommand.register(dispatcher);
+        WhitelistItemPickupCommand.register(dispatcher,registryAccess);
     }
 }
