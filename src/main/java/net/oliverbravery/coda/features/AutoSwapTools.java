@@ -9,18 +9,17 @@ import net.minecraft.inventory.Inventory;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
-import net.oliverbravery.coda.Coda;
 import net.oliverbravery.coda.config.Config;
 import net.oliverbravery.coda.utilities.InventoryManipulator;
+import net.oliverbravery.coda.utilities.Utils;
 import org.lwjgl.glfw.GLFW;
 
 public class AutoSwapTools {
     public static KeyBinding keybind;
-    public AutoSwapTools() { SetKeybind(); }
     public static int slotToSwitchBack = -1;
     public static boolean swapInProgress = false;
 
-    public void FindBestTool(BlockState blockState, MinecraftClient mc) {
+    public static void FindBestTool(BlockState blockState, MinecraftClient mc) {
         if(mc.player != null) {
             double bestSpeed = mc.player.getInventory().getMainHandStack().getMiningSpeedMultiplier(blockState);
             int bestSlot = mc.player.getInventory().selectedSlot;
@@ -59,7 +58,7 @@ public class AutoSwapTools {
         }
     }
 
-    public void tick(MinecraftClient client) {
+    public static void tick(MinecraftClient client) {
         HitResult rayTrace = client.crosshairTarget;
         if (rayTrace instanceof BlockHitResult && client.interactionManager != null &&
                 client.interactionManager.isBreakingBlock() && Boolean.parseBoolean(Config.GetValue("AutoSwapToolsEnabled","true"))) {
@@ -85,5 +84,19 @@ public class AutoSwapTools {
                         GLFW.GLFW_KEY_O,
                         "Coda"
                 ));
+    }
+
+    public static int Toggle() {
+        if(!Utils.SWITCHEROO_INSTALLED) {
+            Config.SetValue("AutoSwapToolsEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSwapToolsEnabled", "true"))));
+            Utils.SendChatMessage(String.format("§6Auto Swap Tool has been toggled to §6%s", Config.GetValue("AutoSwapToolsEnabled", "true")));
+        }
+        return 1;
+    }
+
+    public static void KeybindCheck(){
+        if(AutoSwapTools.keybind.wasPressed()) {
+            AutoSwapTools.Toggle();
+        }
     }
 }

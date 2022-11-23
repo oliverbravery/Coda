@@ -1,6 +1,5 @@
 package net.oliverbravery.coda.mixin;
 
-import net.oliverbravery.coda.Coda;
 import net.oliverbravery.coda.features.SlotRandomiser;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
@@ -24,12 +23,11 @@ public abstract class HotbarRandomiseMixin extends DrawableHelper {
     public void tick(final CallbackInfo info) {
         ClientPlayerEntity player = MinecraftClient.getInstance().player;
         if(player != null) {
-            SlotRandomiser sVals = Coda.slotRandomiser;
             inventory = player.getInventory();
-            if(sVals.randomiseSlotsActive && !sVals.randomiseSlotKeyList.isEmpty()) {
+            if(SlotRandomiser.randomiseSlotsActive && !SlotRandomiser.randomiseSlotKeyList.isEmpty()) {
                 if(delay == 0) {
-                    int rnd = ThreadLocalRandom.current().nextInt(sVals.randomiseSlotKeyList.size());
-                    inventory.selectedSlot = sVals.randomiseSlotKeyList.get(rnd);
+                    int rnd = ThreadLocalRandom.current().nextInt(SlotRandomiser.randomiseSlotKeyList.size());
+                    inventory.selectedSlot = SlotRandomiser.randomiseSlotKeyList.get(rnd);
                     delay = 1;
                 }
                 else {

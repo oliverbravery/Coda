@@ -3,7 +3,6 @@ package net.oliverbravery.coda.utilities;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
-import net.minecraft.entity.ItemEntity;
 import net.minecraft.screen.slot.SlotActionType;
 
 public class InventoryManipulator {

@@ -5,6 +5,7 @@ import net.minecraft.entity.projectile.FishingBobberEntity;
 import net.minecraft.util.Hand;
 import net.oliverbravery.coda.Coda;
 import net.oliverbravery.coda.config.Config;
+import net.oliverbravery.coda.features.AutoFish;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -21,7 +22,7 @@ public class AutoFishMixin {
             //Withdraw  rod
             client.interactionManager.interactItem(client.player, Hand.MAIN_HAND);
             Coda.LOGGER.info("Withdrew Rod");
-            Coda.autoFish.RecastRod();
+            AutoFish.RecastRod();
         }
     }
 }

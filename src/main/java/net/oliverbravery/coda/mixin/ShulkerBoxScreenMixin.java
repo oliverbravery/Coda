@@ -21,7 +21,7 @@ public class ShulkerBoxScreenMixin extends Screen {
 
     @Inject(at = @At("TAIL"), method = "render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V")
     public void renderScreen(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
-        if(Boolean.parseBoolean(Config.GetValue("ShulkerBoxUnloadEnabled", "true"))) {
+        if(Boolean.parseBoolean(Config.GetValue("ShulkerBoxUnloadEnabled", "false"))) {
             this.addDrawableChild(new ButtonWidget(this.width / 2 - 90, this.height / 2 + 35 - 145, 50, 20, Text.of("Empty"), (button) -> {
                 Coda.LOGGER.info("Pressed Shulker EMPTY button!");
                 ShulkerBoxUnloader.UnloadShulkerBox();

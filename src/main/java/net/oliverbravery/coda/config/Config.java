@@ -5,7 +5,7 @@ import java.io.*;
 public class Config {
     public static String configPath = "config/CodaConfig.config";
 
-    public Config() {
+    public static void Initialize() {
         File f = new File(configPath);
         if(!f.exists()) {
             try {
@@ -16,7 +16,7 @@ public class Config {
         LoadConfigSettings();
     }
 
-    public void LoadConfigSettings() {
+    public static void LoadConfigSettings() {
         if(Utils.SWITCHEROO_INSTALLED) {
             Config.SetValue("AutoSwapToolsEnabled", "false");
             Config.SetValue("AutoSaveToolEnabled", "false");

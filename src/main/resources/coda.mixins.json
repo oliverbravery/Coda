@@ -9,7 +9,8 @@
     "HotbarRandomiseMixin",
     "PauseMenuMixin",
     "AutoFishMixin",
-    "ShulkerBoxScreenMixin"
+    "ShulkerBoxScreenMixin",
+    "ClientConnectionMixin"
   ],
   "injectors": {
     "defaultRequire": 1

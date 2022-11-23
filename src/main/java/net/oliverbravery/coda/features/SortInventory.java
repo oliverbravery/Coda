@@ -14,16 +14,15 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 public class SortInventory {
-    private String filePath = "savedInventory.txt";
+    private static String filePath = "savedInventory.txt";
     public static KeyBinding saveInventoryKeybind;
     public static KeyBinding sortInventoryKeybind;
 
-    public SortInventory() {
+    public static void Initialize() {
         CreateTextFile();
-        SetupKeybinds();
     }
 
-    private void CreateTextFile() {
+    private static void CreateTextFile() {
         File textFile = new File(filePath);
         {
             try {
@@ -33,7 +32,7 @@ public class SortInventory {
         }
     }
 
-    private void WriteToTextFile(String content) {
+    private static void WriteToTextFile(String content) {
         try {
             FileWriter myWriter = new FileWriter(filePath);
             myWriter.write(content);
@@ -42,7 +41,7 @@ public class SortInventory {
         catch(Exception e) {}
     }
 
-    public void AddInventory() {
+    public static void AddInventory() {
         //save current inventory
         MinecraftClient mc = MinecraftClient.getInstance();
         Inventory inv;
@@ -64,7 +63,7 @@ public class SortInventory {
         mc.player.sendMessage(Text.literal("§aSuccessfully saved the inventory."), false);
     }
 
-    public void LoadInventory() {
+    public static void LoadInventory() {
         String inventoryToLoad = "";
         MinecraftClient mc = MinecraftClient.getInstance();
         if(mc.player != null) {
@@ -114,7 +113,7 @@ public class SortInventory {
         mc.player.sendMessage(Text.literal("§aSuccessfully sorted the inventory."), false);
     }
 
-    private void SetupKeybinds() {
+    public static void SetupKeybinds() {
         saveInventoryKeybind = KeyBindingHelper.registerKeyBinding(
                 new KeyBinding(
                         "key.coda.saveinventory",
@@ -130,5 +129,14 @@ public class SortInventory {
                         GLFW.GLFW_KEY_U,
                         "Coda"
                 ));
+    }
+
+    public static void KeybindCheck() {
+        if(SortInventory.sortInventoryKeybind.wasPressed()) {
+            SortInventory.LoadInventory();
+        }
+        if(SortInventory.saveInventoryKeybind.wasPressed()) {
+            SortInventory.AddInventory();
+        }
     }
 }

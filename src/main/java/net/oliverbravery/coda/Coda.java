@@ -2,10 +2,10 @@ package net.oliverbravery.coda;
 
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
-import net.minecraft.client.MinecraftClient;
-import net.oliverbravery.coda.commands.Commands;
+import net.oliverbravery.coda.commands.CommandManager;
 import net.oliverbravery.coda.config.Config;
 import net.oliverbravery.coda.features.*;
+import net.oliverbravery.coda.utilities.KeybindEvents;
 import net.oliverbravery.coda.utilities.Utils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,59 +20,29 @@ import org.slf4j.LoggerFactory;
 * */
 public class Coda implements ClientModInitializer {
 	public static final Logger LOGGER = LoggerFactory.getLogger("modid");
-	public static SlotRandomiser slotRandomiser = new SlotRandomiser();
-	public static AutoFish autoFish = new AutoFish();
-	public static ArmorSwap armorSwap = new ArmorSwap();
-	public static AutoSaveTool autoSaveTool = new AutoSaveTool();
-	public static SortInventory sortInventory = new SortInventory();
-	public static FastPlace fastPlace = new FastPlace();
-	public static Commands commands = new Commands();
-	public static Utils utils = new Utils();
-	public static AutoSwapTools autoSwapTools = new AutoSwapTools();
+	public static CommandManager commandManager = new CommandManager();
 
 	@Override
 	public void onInitializeClient() {
-		ClientTickEvents.END_CLIENT_TICK.register(autoFish::tick);
-		ClientTickEvents.END_CLIENT_TICK.register(autoSaveTool::tick);
-		ClientTickEvents.END_CLIENT_TICK.register(fastPlace::tick);
-		ClientTickEvents.END_CLIENT_TICK.register(autoSwapTools::tick);
-		ClientTickEvents.END_CLIENT_TICK.register(this::tick);
-		Config config = new Config();
-		commands.InitialiseCommands();
+		Coda.InitializeFeatures();
+		RegisterTickEvents();
+		KeybindEvents.InitializeKeybinds();
+		commandManager.onInitializeClient();
 	}
 
-	public void tick(MinecraftClient client) {
-		//Checks for keybinds pressed
-		if(autoSaveTool.autoSaveToolKeybind.wasPressed()) {
-			if(!Utils.SWITCHEROO_INSTALLED) {
-				Config.SetValue("AutoSaveToolEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSaveToolEnabled", "true"))));
-				Utils.SendChatMessage(String.format("§6Auto Save Tool has been toggled to §6%s", Config.GetValue("AutoSaveToolEnabled", "true")));
-			}
-		}
-		if(autoFish.autoFishKeybind.wasPressed()) {
-			Config.SetValue("AutoFishEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoFishEnabled", "true"))));
-			Utils.SendChatMessage(String.format("§6Auto Fish has been toggled to §6%s", Config.GetValue("AutoFishEnabled", "true")));
-		}
-		if(slotRandomiser.randomiseSlotKeybind.wasPressed()) {
-			slotRandomiser.randomiseSlotsActive = !slotRandomiser.randomiseSlotsActive;
-			Utils.SendChatMessage(String.format("§6Slot Randomizer has been toggled to §6%s",  slotRandomiser.randomiseSlotsActive));
-		}
-		if(armorSwap.armorSwapKeybind.wasPressed()) {
-			armorSwap.SwapPieces();
-		}
-		if(sortInventory.sortInventoryKeybind.wasPressed()) {
-			sortInventory.LoadInventory();
-		}
-		if(sortInventory.saveInventoryKeybind.wasPressed()) {
-			sortInventory.AddInventory();
-		}
-		if(fastPlace.keybind.wasPressed()) {
-			fastPlace.FastPlaceEnabled = !fastPlace.FastPlaceEnabled;
-		}
-		if(autoSwapTools.keybind.wasPressed()) {
-			if(!Utils.SWITCHEROO_INSTALLED) {
-				Config.SetValue("AutoSwapToolsEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSwapToolsEnabled", "true"))));
-			}
-		}
+	public void RegisterTickEvents() {
+		ClientTickEvents.END_CLIENT_TICK.register(AutoFish::tick);
+		ClientTickEvents.END_CLIENT_TICK.register(AutoSaveTool::tick);
+		ClientTickEvents.END_CLIENT_TICK.register(FastPlace::tick);
+		ClientTickEvents.END_CLIENT_TICK.register(AutoSwapTools::tick);
+		ClientTickEvents.END_CLIENT_TICK.register(LibrarianBookTrade::tick);
+		ClientTickEvents.END_CLIENT_TICK.register(KeybindEvents::tick);
+	}
+
+	public static void InitializeFeatures() {
+		SortInventory.Initialize();
+		SlotRandomiser.Initialize();
+		Utils.Initialize();
+		Config.Initialize();
 	}
 }

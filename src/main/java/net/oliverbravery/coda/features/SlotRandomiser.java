@@ -4,6 +4,7 @@ import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.oliverbravery.coda.config.Config;
+import net.oliverbravery.coda.utilities.Utils;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class SlotRandomiser {
     public static KeyBinding randomiseSlotKeybind;
     public static boolean randomiseSlotsActive = false;
 
-    public SlotRandomiser() {
+    public static void Initialize(){
         SetRandomizeSlotKeybind();
         LoadSlotsFromConfig();
     }
@@ -62,5 +63,17 @@ public class SlotRandomiser {
                 GLFW.GLFW_KEY_R,
                 "Coda"
         ));
+    }
+
+    public static int Toggle() {
+        SlotRandomiser.randomiseSlotsActive = !SlotRandomiser.randomiseSlotsActive;
+        Utils.SendChatMessage(String.format("§6Slot Randomizer has been toggled to §6%s",  SlotRandomiser.randomiseSlotsActive));
+        return 1;
+    }
+
+    public static void KeybindCheck() {
+        if(SlotRandomiser.randomiseSlotKeybind.wasPressed()) {
+            SlotRandomiser.Toggle();
+        }
     }
 }

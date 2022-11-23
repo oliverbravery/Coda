@@ -9,7 +9,6 @@ import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.entity.player.PlayerInventory;
-import net.oliverbravery.coda.Coda;
 import net.oliverbravery.coda.utilities.InventoryManipulator;
 import net.oliverbravery.coda.utilities.Utils;
 import org.lwjgl.glfw.GLFW;
@@ -18,11 +17,7 @@ import org.lwjgl.glfw.GLFW;
 public class ArmorSwap {
     public static KeyBinding armorSwapKeybind;
 
-    public ArmorSwap() {
-        SetArmorSwapKeybind();
-    }
-
-    private int checkForElytra() {
+    private static int checkForElytra() {
         MinecraftClient mc = MinecraftClient.getInstance();
         PlayerInventory x = mc.player.getInventory();
         for (int i = 0; i < x.size(); i++) {
@@ -33,7 +28,7 @@ public class ArmorSwap {
         return -1;
     }
 
-    private int checkForChestplate() {
+    private static int checkForChestplate() {
         MinecraftClient mc = MinecraftClient.getInstance();
         PlayerInventory x = mc.player.getInventory();
         for (int i = 0; i < x.size(); i++) {
@@ -45,7 +40,7 @@ public class ArmorSwap {
         return -1;
     }
 
-    public void SwapPieces() {
+    public static void SwapPieces() {
         MinecraftClient mc = MinecraftClient.getInstance();
         ClientPlayerInteractionManager interactionManager = mc.interactionManager;
         ClientPlayerEntity player = mc.player;
@@ -94,6 +89,12 @@ public class ArmorSwap {
                         GLFW.GLFW_KEY_V,
                         "Coda"
                 ));
+    }
+
+    public static void KeybindCheck() {
+        if(ArmorSwap.armorSwapKeybind.wasPressed()) {
+            ArmorSwap.SwapPieces();
+        }
     }
 
 }

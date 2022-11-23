@@ -5,19 +5,17 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Hand;
+import net.oliverbravery.coda.config.Config;
+import net.oliverbravery.coda.utilities.Utils;
 import org.lwjgl.glfw.GLFW;
 
 public class AutoFish {
-    private int count = 0;
-    private int waitTime = 10;
-    private boolean shouldRecast = false;
+    private static int count = 0;
+    private static int waitTime = 10;
+    private static boolean shouldRecast = false;
     public static KeyBinding autoFishKeybind;
 
-    public AutoFish() {
-        SetAutoFishKeybind();
-    }
-
-    public void tick(MinecraftClient client)
+    public static void tick(MinecraftClient client)
     {
         if(shouldRecast) {
             if(count == waitTime) {
@@ -31,7 +29,7 @@ public class AutoFish {
             }
         }
     }
-    public void RecastRod() {
+    public static void RecastRod() {
         shouldRecast = true;
     }
 
@@ -43,6 +41,18 @@ public class AutoFish {
                         GLFW.GLFW_KEY_G,
                         "Coda"
                 ));
+    }
+
+    public static int Toggle() {
+        Config.SetValue("AutoFishEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoFishEnabled", "true"))));
+        Utils.SendChatMessage(String.format("§6Auto Fish has been toggled to §6%s", Config.GetValue("AutoFishEnabled", "true")));
+        return 1;
+    }
+
+    public static void KeybindCheck() {
+        if(AutoFish.autoFishKeybind.wasPressed()) {
+            AutoFish.Toggle();
+        }
     }
 
 }

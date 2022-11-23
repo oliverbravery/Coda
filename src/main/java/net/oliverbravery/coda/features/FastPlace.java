@@ -11,21 +11,18 @@ import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
+import net.oliverbravery.coda.utilities.Utils;
 import org.lwjgl.glfw.GLFW;
 
 public class FastPlace {
-    public boolean FastPlaceEnabled = false;
+    public static boolean FastPlaceEnabled = false;
     public static KeyBinding keybind;
-    public int tickWaitTime = 1;
-    private int delay = tickWaitTime;
-
-    public FastPlace() {
-        SetKeybind();
-    }
+    public static int tickWaitTime = 1;
+    private static int delay = tickWaitTime;
 
     public void SetTickWaitTime(int value) {tickWaitTime = value;}
 
-    public void tick(MinecraftClient client) {
+    public static void tick(MinecraftClient client) {
         if(client.player != null && FastPlaceEnabled) {
             if(delay == 0) {
                 delay = tickWaitTime;
@@ -38,7 +35,7 @@ public class FastPlace {
         }
     }
 
-    public void PlaceBlockIfAvaliable(MinecraftClient mc) {
+    public static void PlaceBlockIfAvaliable(MinecraftClient mc) {
         HitResult rayTrace = mc.crosshairTarget;
         if (rayTrace instanceof BlockHitResult && mc.interactionManager != null) {
             Direction side = ((BlockHitResult) rayTrace).getSide();
@@ -67,5 +64,17 @@ public class FastPlace {
                         GLFW.GLFW_KEY_BACKSLASH,
                         "Coda"
                 ));
+    }
+
+    public static int Toggle() {
+        FastPlace.FastPlaceEnabled = !FastPlace.FastPlaceEnabled;
+        Utils.SendChatMessage(String.format("§6Fast Place has been toggled to §6%s", FastPlace.FastPlaceEnabled));
+        return 1;
+    }
+
+    public static void KeybindCheck() {
+        if(FastPlace.keybind.wasPressed()) {
+            FastPlace.Toggle();
+        }
     }
 }

@@ -11,16 +11,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.text.Text;
 import net.oliverbravery.coda.config.Config;
 import net.oliverbravery.coda.utilities.InventoryManipulator;
+import net.oliverbravery.coda.utilities.Utils;
 import org.lwjgl.glfw.GLFW;
 
 public class AutoSaveTool {
     public static KeyBinding autoSaveToolKeybind;
 
-    public AutoSaveTool() {
-        SetAutoSaveToolKeybind();
-    }
-
-    private int FindFreeSlot(String itemName) {
+    private static int FindFreeSlot(String itemName) {
         //NOT hotbar
         MinecraftClient mc = MinecraftClient.getInstance();
         PlayerInventory x = mc.player.getInventory();
@@ -35,7 +32,7 @@ public class AutoSaveTool {
         return -1;
     }
 
-    private int FindSlotWithoutTool() {
+    private static int FindSlotWithoutTool() {
         //NOT HOTBAR
         MinecraftClient mc = MinecraftClient.getInstance();
         PlayerInventory x = mc.player.getInventory();
@@ -48,7 +45,7 @@ public class AutoSaveTool {
         return -1;
     }
 
-    public void tick(MinecraftClient client) {
+    public static void tick(MinecraftClient client) {
         if(Boolean.parseBoolean(Config.GetValue("AutoSaveToolEnabled","true"))) {
             MinecraftClient mc = MinecraftClient.getInstance();
             PlayerEntity player = mc.player;
@@ -101,5 +98,19 @@ public class AutoSaveTool {
                         GLFW.GLFW_KEY_K,
                         "Coda"
                 ));
+    }
+
+    public static int Toggle() {
+        if(!Utils.SWITCHEROO_INSTALLED) {
+            Config.SetValue("AutoSaveToolEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSaveToolEnabled", "true"))));
+            Utils.SendChatMessage(String.format("§6Auto Save Tool has been toggled to §6%s", Config.GetValue("AutoSaveToolEnabled", "true")));
+        }
+        return 1;
+    }
+
+    public static void KeybindCheck() {
+        if(AutoSaveTool.autoSaveToolKeybind.wasPressed()) {
+            AutoSaveTool.Toggle();
+        }
     }
 }

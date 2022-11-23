@@ -6,8 +6,10 @@ import net.minecraft.client.gui.widget.ElementListWidget;
 import net.minecraft.client.option.GameOptions;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
-import net.oliverbravery.coda.Coda;
 import net.oliverbravery.coda.config.Config;
+import net.oliverbravery.coda.features.SlotRandomiser;
+import net.oliverbravery.coda.features.SortInventory;
+import net.oliverbravery.coda.utilities.Utils;
 
 public class CodaSettingsScreen extends Screen {
     private final Screen parent;
@@ -21,18 +23,18 @@ public class CodaSettingsScreen extends Screen {
     }
     private void ToggleHotbarSlot(int slotNumber) {
         if(GetSlotStatus(slotNumber) == "Enabled") {
-            Coda.slotRandomiser.RemoveRandomSlot(slotNumber);
+            SlotRandomiser.RemoveRandomSlot(slotNumber);
             //Change to Disabled
         }
         else {
-            Coda.slotRandomiser.AddRandomSlot(slotNumber);
+            SlotRandomiser.AddRandomSlot(slotNumber);
             //change to Enabled
         }
         this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
     }
 
     private String GetSlotStatus(int slotNumber) {
-        var x = Coda.slotRandomiser.randomiseSlotKeyList;
+        var x = SlotRandomiser.randomiseSlotKeyList;
         Boolean slotEnabled = false;
         for (var i: x) {
             if (i == slotNumber) {
@@ -84,7 +86,7 @@ public class CodaSettingsScreen extends Screen {
     }
 
     private String GetRandomizeSlotsStatus() {
-        boolean randomizeSlotsStatus = Coda.slotRandomiser.randomiseSlotsActive;
+        boolean randomizeSlotsStatus = SlotRandomiser.randomiseSlotsActive;
         if (randomizeSlotsStatus) {
             return "§aEnabled";
         } else {
@@ -113,7 +115,7 @@ public class CodaSettingsScreen extends Screen {
         this.addDrawableChild(new ButtonWidget(width / 2 - 70, this.height / 4 + 50 + -16,
                 140, 20, Text.literal(String.format("Randomize Slots : %s", GetRandomizeSlotsStatus())),
                 button -> {
-                    Coda.slotRandomiser.randomiseSlotsActive = !Coda.slotRandomiser.randomiseSlotsActive;
+                    SlotRandomiser.randomiseSlotsActive = !SlotRandomiser.randomiseSlotsActive;
                     this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
     }
@@ -134,19 +136,19 @@ public class CodaSettingsScreen extends Screen {
                     Config.SetValue("AutoSaveToolEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSaveToolEnabled", "true"))));
                     this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
-        if(Coda.utils.SWITCHEROO_INSTALLED) {x.active = false;}
+        if(Utils.SWITCHEROO_INSTALLED) {x.active = false;}
     }
 
     private void AddSavedInventoryScreenButton() {
         this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 110 + -16,
                 110, 20, Text.literal("Save Inventory"),
                 button -> {
-                    Coda.sortInventory.AddInventory();
+                    SortInventory.AddInventory();
                 }));
         this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 110 + -16,
                 110, 20, Text.literal("Load Inventory"),
                 button -> {
-                    Coda.sortInventory.LoadInventory();
+                    SortInventory.LoadInventory();
                 }));
     }
 
@@ -157,7 +159,7 @@ public class CodaSettingsScreen extends Screen {
                     Config.SetValue("AutoSwapToolsEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSwapToolsEnabled", "true"))));
                     this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
                 }));
-        if(Coda.utils.SWITCHEROO_INSTALLED) {x.active = false;}
+        if(Utils.SWITCHEROO_INSTALLED) {x.active = false;}
     }
 
     private void DisplayCodaButton() {
