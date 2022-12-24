@@ -10,6 +10,8 @@ import net.minecraft.command.CommandRegistryAccess;
 import net.minecraft.command.argument.RegistryEntryArgumentType;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.registry.RegistryKeys;
+import net.minecraft.registry.entry.RegistryEntry;
+import net.oliverbravery.coda.Coda;
 import net.oliverbravery.coda.features.LibrarianBookTrade;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
@@ -26,8 +28,9 @@ public class LibrarianBookTradeCommand {
 
     private static int run(CommandContext<FabricClientCommandSource> context) {
         Integer bookPrice = IntegerArgumentType.getInteger(context, "maxprice");
-        Enchantment book = context.getArgument("book", Enchantment.class);
-        LibrarianBookTrade.Run(book, bookPrice);
+        RegistryEntry<Enchantment> enchantment = context.getArgument("book", RegistryEntry.class);
+        Enchantment e = (Enchantment)enchantment.value();
+        LibrarianBookTrade.Run(e, bookPrice);
         return 1;
     }
 }
