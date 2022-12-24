@@ -38,7 +38,7 @@ public class AutoFish {
                 new KeyBinding(
                         "key.coda.toggleautofish",
                         InputUtil.Type.KEYSYM,
-                        GLFW.GLFW_KEY_G,
+                        GLFW.GLFW_KEY_UNKNOWN,
                         "Coda"
                 ));
     }

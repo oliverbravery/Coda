@@ -118,7 +118,7 @@ public class SortInventory {
                 new KeyBinding(
                         "key.coda.saveinventory",
                         InputUtil.Type.KEYSYM,
-                        GLFW.GLFW_KEY_P,
+                        GLFW.GLFW_KEY_UNKNOWN,
                         "Coda"
                 ));
 
@@ -126,7 +126,7 @@ public class SortInventory {
                 new KeyBinding(
                         "key.coda.sortinventory",
                         InputUtil.Type.KEYSYM,
-                        GLFW.GLFW_KEY_U,
+                        GLFW.GLFW_KEY_UNKNOWN,
                         "Coda"
                 ));
     }

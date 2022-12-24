@@ -13,7 +13,7 @@
   "contact": {
     "homepage": "https://www.curseforge.com/minecraft/mc-mods/coda",
     "sources": "https://github.com/oliverbravery/Coda",
-    "issues": "https://www.curseforge.com/minecraft/mc-mods/coda"
+    "issues": "https://github.com/oliverbravery/Coda/issues"
   },
   "license": "MIT",
   "icon": "assets/coda/icon.png",

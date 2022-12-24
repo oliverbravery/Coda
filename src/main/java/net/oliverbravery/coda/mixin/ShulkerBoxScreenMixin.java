@@ -8,6 +8,7 @@ import net.minecraft.text.Text;
 import net.oliverbravery.coda.Coda;
 import net.oliverbravery.coda.config.Config;
 import net.oliverbravery.coda.features.ShulkerBoxUnloader;
+import org.apache.commons.lang3.ObjectUtils;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -22,10 +23,10 @@ public class ShulkerBoxScreenMixin extends Screen {
     @Inject(at = @At("TAIL"), method = "render(Lnet/minecraft/client/util/math/MatrixStack;IIF)V")
     public void renderScreen(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo ci) {
         if(Boolean.parseBoolean(Config.GetValue("ShulkerBoxUnloadEnabled", "false"))) {
-            this.addDrawableChild(new ButtonWidget(this.width / 2 - 90, this.height / 2 + 35 - 145, 50, 20, Text.of("Empty"), (button) -> {
+            this.addDrawableChild(ButtonWidget.builder(Text.of("Empty"), (button) -> {
                 Coda.LOGGER.info("Pressed Shulker EMPTY button!");
                 ShulkerBoxUnloader.UnloadShulkerBox();
-            }));
+            }).size(50, 20).position(this.width / 2 - 90, this.height / 2 + 35 - 145).build());
         }
     }
 }

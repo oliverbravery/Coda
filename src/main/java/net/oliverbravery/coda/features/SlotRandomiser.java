@@ -60,7 +60,7 @@ public class SlotRandomiser {
                 new KeyBinding(
                 "key.coda.togglekeyrandomiser",
                 InputUtil.Type.KEYSYM,
-                GLFW.GLFW_KEY_R,
+                GLFW.GLFW_KEY_UNKNOWN,
                 "Coda"
         ));
     }

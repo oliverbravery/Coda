@@ -124,7 +124,8 @@ public class LibrarianBookTrade {
         lecturnPos = null;
         MinecraftClient client = MinecraftClient.getInstance();
         client.send(() -> client.setScreen(null));
-        Utils.SendChatMessage("Error has occurred. Please make sure you are close to a lectern and villager.");
+        Utils.SendChatMessage("Error has occurred. Please make sure you are close to a lectern and " +
+                "villager and holding lectern(s) in off-hand.");
     }
 
     private  static void UpdateStatus(boolean mode){

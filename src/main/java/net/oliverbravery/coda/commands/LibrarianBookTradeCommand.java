@@ -6,18 +6,20 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.tree.LiteralCommandNode;
 import net.fabricmc.fabric.api.client.command.v2.ClientCommandManager;
 import net.fabricmc.fabric.api.client.command.v2.FabricClientCommandSource;
-import net.minecraft.command.argument.EnchantmentArgumentType;
+import net.minecraft.command.CommandRegistryAccess;
+import net.minecraft.command.argument.RegistryEntryArgumentType;
 import net.minecraft.enchantment.Enchantment;
+import net.minecraft.registry.RegistryKeys;
 import net.oliverbravery.coda.features.LibrarianBookTrade;
 
 import static net.fabricmc.fabric.api.client.command.v2.ClientCommandManager.literal;
 
 public class LibrarianBookTradeCommand {
-    public static LiteralCommandNode register(CommandDispatcher<FabricClientCommandSource> dispatcher) {
+    public static LiteralCommandNode register(CommandDispatcher<FabricClientCommandSource> dispatcher, CommandRegistryAccess commandRegistryAccess) {
         return dispatcher.register(
                 literal("coda")
                         .then(literal("librariantrade")
-                                .then(ClientCommandManager.argument("book", EnchantmentArgumentType.enchantment())
+                                .then(ClientCommandManager.argument("book", RegistryEntryArgumentType.registryEntry(commandRegistryAccess, RegistryKeys.ENCHANTMENT))
                                         .then(ClientCommandManager.argument("maxprice", IntegerArgumentType.integer(0,64))
                                                 .executes(LibrarianBookTradeCommand::run)))));
     }

@@ -61,7 +61,7 @@ public class FastPlace {
                 new KeyBinding(
                         "key.coda.togglefastplace",
                         InputUtil.Type.KEYSYM,
-                        GLFW.GLFW_KEY_BACKSLASH,
+                        GLFW.GLFW_KEY_UNKNOWN,
                         "Coda"
                 ));
     }

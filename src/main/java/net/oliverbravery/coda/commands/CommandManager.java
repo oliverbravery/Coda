@@ -19,7 +19,7 @@ public class CommandManager implements ClientModInitializer {
     public static void registerCommands(CommandDispatcher<FabricClientCommandSource> dispatcher,
                                         CommandRegistryAccess registryAccess) {
         CodaMenuCommand.register(dispatcher);
-        LibrarianBookTradeCommand.register(dispatcher);
+        LibrarianBookTradeCommand.register(dispatcher,registryAccess);
         AutoFishCommand.register(dispatcher);
         AutoSaveToolsCommand.register(dispatcher);
         ArmorSwapCommand.register(dispatcher);
@@ -30,5 +30,6 @@ public class CommandManager implements ClientModInitializer {
         ShulkerBoxUnloaderCommand.register(dispatcher);
         CodaMenuButtonCommand.register(dispatcher);
         WhitelistItemPickupCommand.register(dispatcher,registryAccess);
+        SlotRandomiserCommand.register(dispatcher);
     }
 }

@@ -86,7 +86,7 @@ public class ArmorSwap {
                 new KeyBinding(
                         "key.coda.armorswap",
                         InputUtil.Type.KEYSYM,
-                        GLFW.GLFW_KEY_V,
+                        GLFW.GLFW_KEY_UNKNOWN,
                         "Coda"
                 ));
     }

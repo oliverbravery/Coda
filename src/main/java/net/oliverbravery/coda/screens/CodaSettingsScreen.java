@@ -105,70 +105,55 @@ public class CodaSettingsScreen extends Screen {
                 numberForSlot = String.format("§c%s", i + 1);
             }
             int finalI = i;
-            this.addDrawableChild(new ButtonWidget(width / 2 - 112 + (25 * i), this.height / 4 + 20 + -16,
-                    25, 20, Text.literal(String.format("%s", numberForSlot)),
-                    button -> {
-                        ToggleHotbarSlot(finalI);
-                    }));
+            this.addDrawableChild(ButtonWidget.builder(Text.literal(String.format("%s", numberForSlot)), (button) -> {
+                ToggleHotbarSlot(finalI);
+            }).size(25, 20).position(width / 2 - 112 + (25 * i), this.height / 4 + 20 + -16).build());
         }
         //Toggle Button
-        this.addDrawableChild(new ButtonWidget(width / 2 - 70, this.height / 4 + 50 + -16,
-                140, 20, Text.literal(String.format("Randomize Slots : %s", GetRandomizeSlotsStatus())),
-                button -> {
-                    SlotRandomiser.randomiseSlotsActive = !SlotRandomiser.randomiseSlotsActive;
-                    this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
-                }));
+        this.addDrawableChild(ButtonWidget.builder(Text.literal(String.format("Randomize Slots : %s", GetRandomizeSlotsStatus())), (button) -> {
+            SlotRandomiser.randomiseSlotsActive = !SlotRandomiser.randomiseSlotsActive;
+            this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
+        }).size(140, 20).position(width / 2 - 70, this.height / 4 + 50 + -16).build());
     }
 
     private void AddAutoFishButton() {
-        this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 80 + -16,
-                110, 20, Text.literal(String.format("AutoFish : %s", GetAutoFishStatus())),
-                button -> {
-                    Config.SetValue("AutoFishEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoFishEnabled", "true"))));
-                    this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
-                }));
+        this.addDrawableChild(ButtonWidget.builder(Text.literal(String.format("AutoFish : %s", GetAutoFishStatus())), (button) -> {
+            Config.SetValue("AutoFishEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoFishEnabled", "true"))));
+            this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
+        }).size(110, 20).position(width / 2 - 115, this.height / 4 + 80 + -16).build());
     }
 
     private void AddAutoSaveToolButton() {
-        var x = this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 80 + -16,
-                110, 20, Text.literal(String.format("SaveTool : %s", GetAutoSaveToolStatus())),
-                button -> {
-                    Config.SetValue("AutoSaveToolEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSaveToolEnabled", "true"))));
-                    this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
-                }));
+        var x = this.addDrawableChild(ButtonWidget.builder(Text.literal(String.format("SaveTool : %s", GetAutoSaveToolStatus())), (button) -> {
+            Config.SetValue("AutoSaveToolEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSaveToolEnabled", "true"))));
+            this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
+        }).size(110, 20).position(width / 2 + 5, this.height / 4 + 80 + -16).build());
         if(Utils.SWITCHEROO_INSTALLED) {x.active = false;}
     }
 
     private void AddSavedInventoryScreenButton() {
-        this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 110 + -16,
-                110, 20, Text.literal("Save Inventory"),
-                button -> {
-                    SortInventory.AddInventory();
-                }));
-        this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 110 + -16,
-                110, 20, Text.literal("Load Inventory"),
-                button -> {
-                    SortInventory.LoadInventory();
-                }));
+        this.addDrawableChild(ButtonWidget.builder(Text.literal("Save Inventory"), (button) -> {
+            SortInventory.AddInventory();
+        }).size(110, 20).position(width / 2 - 115, this.height / 4 + 110 + -16).build());
+
+        this.addDrawableChild(ButtonWidget.builder(Text.literal("Load Inventory"), (button) -> {
+            SortInventory.LoadInventory();
+        }).size(110, 20).position(width / 2 + 5, this.height / 4 + 110 + -16).build());
     }
 
     private void AddToolSwap() {
-        var x = this.addDrawableChild(new ButtonWidget(width / 2 - 115, this.height / 4 + 140 + -16,
-                110, 20, Text.literal(String.format("ToolSwap : %s", GetAutoToolSwapStatus())),
-                button -> {
-                    Config.SetValue("AutoSwapToolsEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSwapToolsEnabled", "true"))));
-                    this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
-                }));
+        var x = this.addDrawableChild(ButtonWidget.builder(Text.literal(String.format("ToolSwap : %s", GetAutoToolSwapStatus())), (button) -> {
+            Config.SetValue("AutoSwapToolsEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("AutoSwapToolsEnabled", "true"))));
+            this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
+        }).size(110, 20).position(width / 2 - 115, this.height / 4 + 140 + -16).build());
         if(Utils.SWITCHEROO_INSTALLED) {x.active = false;}
     }
 
     private void DisplayCodaButton() {
-        this.addDrawableChild(new ButtonWidget(width / 2 + 5, this.height / 4 + 140 + -16,
-                110, 20, Text.literal(String.format("CodaButton : %s", GetCodaButtonStatus())),
-                button -> {
-                    Config.SetValue("CodaButtonEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("CodaButtonEnabled", "true"))));
-                    this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
-                }));
+        this.addDrawableChild(ButtonWidget.builder(Text.literal(String.format("CodaButton : %s", GetCodaButtonStatus())), (button) -> {
+            Config.SetValue("CodaButtonEnabled", String.valueOf(!Boolean.parseBoolean(Config.GetValue("CodaButtonEnabled", "true"))));
+            this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
+        }).size(110, 20).position(width / 2 + 5, this.height / 4 + 140 + -16).build());
     }
 
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {

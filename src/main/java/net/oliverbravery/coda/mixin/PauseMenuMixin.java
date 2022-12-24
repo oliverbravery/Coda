@@ -23,8 +23,8 @@ public class PauseMenuMixin extends Screen {
     private void initWidgets(CallbackInfo info) {
         //10,10,90,20
         if(Boolean.parseBoolean(Config.GetValue("CodaButtonEnabled", "true")))
-        this.addDrawableChild(new ButtonWidget(width/2 - 102, Utils.SHOULD_COMPENSATE_FOR_MODMENU_BUTTON ? this.height / 4 + 168 + -16 : this.height / 4 + 144 + -16,204,20, Text.literal("§6Coda"), button -> {
+        this.addDrawableChild(ButtonWidget.builder(Text.of("§6Coda"), (button) -> {
             this.client.setScreen(new CodaSettingsScreen(this, this.client.options));
-        }));
+        }).size(204, 20).position(width/2 - 102, Utils.SHOULD_COMPENSATE_FOR_MODMENU_BUTTON ? this.height / 4 + 168 + -16 : this.height / 4 + 144 + -16).build());
     }
 }

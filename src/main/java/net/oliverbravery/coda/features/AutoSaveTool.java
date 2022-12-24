@@ -95,7 +95,7 @@ public class AutoSaveTool {
                 new KeyBinding(
                         "key.coda.toggleautosavetool",
                         InputUtil.Type.KEYSYM,
-                        GLFW.GLFW_KEY_K,
+                        GLFW.GLFW_KEY_UNKNOWN,
                         "Coda"
                 ));
     }

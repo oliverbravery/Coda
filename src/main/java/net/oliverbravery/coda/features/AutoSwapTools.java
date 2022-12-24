@@ -81,7 +81,7 @@ public class AutoSwapTools {
                 new KeyBinding(
                         "key.coda.toolswap",
                         InputUtil.Type.KEYSYM,
-                        GLFW.GLFW_KEY_O,
+                        GLFW.GLFW_KEY_UNKNOWN,
                         "Coda"
                 ));
     }
