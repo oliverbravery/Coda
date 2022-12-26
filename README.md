@@ -37,7 +37,7 @@ Client side quality of life improvements without adding additional items, blocks
 
 ---
 
-[<img src="https://raw.githubusercontent.com/modrinth/art/main/Branding/Badge/badge-dark.svg">](https://modrinth.com/mod/coda/versions)
+[![Download Link](https://raw.githubusercontent.com/modrinth/art/main/Branding/Badge/badge-dark.svg)](https://modrinth.com/mod/coda/versions)
 
 ## Issues and Suggestions
 
