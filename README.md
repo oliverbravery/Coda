@@ -1,32 +1,46 @@
 # Coda
-### A client-side fabric Minecraft modification to assist the player in their survival journey.
------
+
+![Modrinth Version](https://img.shields.io/modrinth/v/coda?color=purple&style=for-the-badge)
+![Minecraft Versions](https://img.shields.io/badge/Minecraft-1.19--1.19.3+-9450cc?style=for-the-badge)
+![Modrinth Downloads](https://img.shields.io/modrinth/dt/coda?style=for-the-badge)
+[![License: MIT](https://img.shields.io/badge/dynamic/json?style=for-the-badge&label=License&amp;query=license.id&amp;&amp;url=https://api.modrinth.com/api/v1/mod/coda)](https://cdn-raw.modrinth.com/licenses/mit.txt)
+
+>This mod is still in development. Feel free to open an issue/discussion on Github with any suggestions or bugs you find.
+
+Client side quality of life improvements without adding additional items, blocks or entities to the base game. All features can be accessed using the `/coda` command prefix. Hotkeys for certain features can be programmed in the default Minecraft setting page.
+
 ## Features
-- Elytra chestplate swap. (*hotkey* + *toggleable*)
 
-- Fast place ~ quickly place blocks from your main hand. (*hotkey*)
+---
 
-- Inventory saving and sorting ~ save your inventory then sort your inventory based on the saved version. (*hotkey* + *toggleable*)
+`/coda librariantrade [book] [max_price]` - find the book trade you desire for librarian villagers automatically
 
-- Auto save tool ~ automatically move tools from your main hand when they are about to break to prevent them from breaking. (*toggleable*)
+`/coda armorswap` - swap between your chestplate and elytra with a click of a button
 
-- Hotbar slot randomiser ~ based on the players choice of slots, randomly chance to a slot in range of the user's choice until toggled off. Great for getting random patterns when building. (*hotkey* + *toggleable*) 
+`/coda autosavetools` - move low durability tools from your main hand to prevent them from breaking automatically 
 
-- Auto fish ~ automatically casts and reels in fishing rod. (*hotkey* + *toggleable*)
+`/coda autosavetools` - choose the best tool for the block you are breaking automatically 
 
-- Auto swap tool ~ when breaking a block, the best tool will be chosen automatically. (*hotkey* + *toggleable*)
+`/coda shulkerboxunloader` - empty the content of a shulkerbox with the press of a button
 
-- "/coda" command can be used to open the Coda settings menu.
+`/coda itempickupwhitelist {additem | removeitem | removeallitems | displayallitems} [item]` - whitelist what items you can pick up
 
-- "/coda button toggle" command can be used to toggle whether the Coda button is visable in the pause menu.
+`/coda slotrandomiser {configure}` - choose which slots to randomly scroll through to create truly random gradients for your builds
+
+`/coda autofish` - cast and reel in a fishing rod automatically
+
+`/coda {sortinventory | saveinventory}` - save your inventory's layout and use the saved layout to automatically sort your inventory later
+
+`/coda fastplace` - place blocks extremely quickly (one block per tick)
 
 ## Download
-The mod is available for download on the following services:
-- [CurseForge](https://www.curseforge.com/minecraft/mc-mods/coda)
-- [Modrinth](https://modrinth.com/mod/coda)
 
-## Requirements
-The modification currently supports Minecraft version 1.19. It is a fabric mod so the fabric mod loader will need to be used. The mod requires java version 17 or higher alongside fabric loader version 0.12.12 or higher and fabric api version 0.55.3+1.19.
+---
 
-## Support
-The mod supports both the "mod menu" fabric modification and the "switcheroo" modification. When the "mod menu" mod is detected the Coda button will be repositioned to allow room for the button. When the "switcheroo" modification is present, the "save tool" and "auto tool" features will be disabled as these modes are incompatible with "switcheroo".
+[<img src="https://raw.githubusercontent.com/modrinth/art/main/Branding/Badge/badge-dark.svg">](https://modrinth.com/mod/coda/versions)
+
+## Issues and Suggestions
+
+---
+
+If you encounter any issues with the modification or have any suggestions please feel free to create a new issue on the [github page](https://github.com/oliverbravery/Coda/issues).
