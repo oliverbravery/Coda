@@ -5,6 +5,8 @@ import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.text.Text;
 
+import java.util.List;
+
 public class Utils {
     public static boolean SHOULD_COMPENSATE_FOR_MODMENU_BUTTON = false;
     public static boolean SWITCHEROO_INSTALLED = false;
@@ -34,6 +36,15 @@ public class Utils {
             cpe = MinecraftClient.getInstance().player;
             cpe.sendMessage(Text.literal(message), true);
         }
+    }
+
+    public static List RemoveItemFromList(List list, String itemToRemove) {
+        for (int i = 0; i < list.size(); i++) {
+            if(itemToRemove.equals(list.get(i).toString())) {
+                list.remove(i);
+            }
+        }
+        return list;
     }
 
 }

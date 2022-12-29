@@ -23,7 +23,7 @@ public class CommandManager implements ClientModInitializer {
         AutoFishCommand.register(dispatcher);
         AutoSaveToolsCommand.register(dispatcher);
         ArmorSwapCommand.register(dispatcher);
-        AutoSwapToolsCommand.register(dispatcher);
+        AutoSwapToolsCommand.register(dispatcher,registryAccess);
         FastPlaceCommand.register(dispatcher);
         SortInventoryCommand.register(dispatcher);
         SlotRandomiserCommand.register(dispatcher);

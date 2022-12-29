@@ -44,5 +44,6 @@ public class Coda implements ClientModInitializer {
 		SlotRandomiser.Initialize();
 		Utils.Initialize();
 		Config.Initialize();
+		AutoSwapTools.Initialize();
 	}
 }

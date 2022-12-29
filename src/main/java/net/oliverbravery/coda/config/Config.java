@@ -1,6 +1,10 @@
 package net.oliverbravery.coda.config;
 import net.oliverbravery.coda.utilities.Utils;
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Config {
     public static String configPath = "config/CodaConfig.config";
@@ -20,6 +24,24 @@ public class Config {
         if(Utils.SWITCHEROO_INSTALLED) {
             Config.SetValue("AutoSwapToolsEnabled", "false");
             Config.SetValue("AutoSaveToolEnabled", "false");
+        }
+    }
+
+    public static Boolean GetBooleanValue(String key, String def) {
+        if(Boolean.parseBoolean(Config.GetValue(key, def))) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public static void ToggleBooleanValue(String key, String def) {
+        if(Config.GetBooleanValue(key, def)) {
+            Config.SetValue(key,"false");
+        }
+        else {
+            Config.SetValue(key,"true");
         }
     }
 
@@ -83,5 +105,28 @@ public class Config {
             catch(Exception e) {}
         }
         catch(Exception e){}
+    }
+
+    public static void SaveListToConfig(List listToSave, String key) {
+        String stringToSave = "";
+        for(int i = 0; i < listToSave.size(); i++) {
+            if(!listToSave.get(i).equals("")) {
+                if(i+1 == listToSave.size()) {stringToSave += String.format("%s", listToSave.get(i));}
+                else {stringToSave += String.format("%s,", listToSave.get(i));}
+            }
+        }
+        Config.SetValue(key, stringToSave);
+    }
+
+    public static List GetStringListFromConfig(String key){
+        List<String> returnList = new ArrayList<String>();
+        String listString = Config.GetValue(key, "");
+        String[] list = listString.split(",");
+        for (String item: list) {
+            try {
+                returnList.add(item);
+            }catch(Exception e){}
+        }
+        return returnList;
     }
 }

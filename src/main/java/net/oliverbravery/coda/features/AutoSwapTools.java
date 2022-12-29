@@ -5,6 +5,8 @@ import net.minecraft.block.BlockState;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.inventory.Inventory;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
@@ -14,29 +16,49 @@ import net.oliverbravery.coda.utilities.InventoryManipulator;
 import net.oliverbravery.coda.utilities.Utils;
 import org.lwjgl.glfw.GLFW;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+
 public class AutoSwapTools {
     public static KeyBinding keybind;
     public static int slotToSwitchBack = -1;
     public static boolean swapInProgress = false;
 
+    public static List<String> blacklistEnchantList = new ArrayList<>(Arrays.asList(new String[0]));
+
     public static void FindBestTool(BlockState blockState, MinecraftClient mc) {
         if(mc.player != null) {
-            double bestSpeed = mc.player.getInventory().getMainHandStack().getMiningSpeedMultiplier(blockState);
+            double bestSpeed = 0.0;
             int bestSlot = mc.player.getInventory().selectedSlot;
             Inventory inv = mc.player.getInventory();
             for (int i = 0; i < inv.size(); i++) {
-                if(inv.getStack(i).getMiningSpeedMultiplier(blockState) > bestSpeed) {
-                    if(Boolean.parseBoolean(Config.GetValue("AutoSaveToolEnabled", "true")) && inv.getStack(i).isDamageable()) {
-                        int remaining = inv.getStack(i).getMaxDamage() - inv.getStack(i).getDamage();
-                        if(remaining > 5) {
-                            bestSlot = i;
-                            bestSpeed = inv.getStack(i).getMiningSpeedMultiplier(blockState);
+                Boolean invalidTool = false;
+                if(i >= 36 && i <= 39){invalidTool = true;}
+                if(Config.GetBooleanValue("AutoSwapToolBlacklistEnabled", "false")) {
+                    Map<Enchantment, Integer> eMap = EnchantmentHelper.fromNbt(inv.getStack(i).getEnchantments());
+                    for (var e: eMap.entrySet()){
+                        Enchantment eName = e.getKey();
+                        for (var b: blacklistEnchantList){
+                            String x = eName.getTranslationKey().toUpperCase().split("\\.")[2];
+                            if (b.toUpperCase().contains(x)){
+                                invalidTool = true;
+                            }
                         }
                     }
-                    else {
-                        bestSlot = i;
-                        bestSpeed = inv.getStack(i).getMiningSpeedMultiplier(blockState);
+                }
+                if(inv.getStack(i).getMiningSpeedMultiplier(blockState) > bestSpeed) {
+                    if(inv.getStack(i).isDamageable()) {
+                        int remaining = inv.getStack(i).getMaxDamage() - inv.getStack(i).getDamage();
+                        if(remaining <= 5) {
+                            invalidTool = true;
+                        }
                     }
+                } else {invalidTool = true;}
+                if(invalidTool == false) {
+                    bestSlot = i;
+                    bestSpeed = inv.getStack(i).getMiningSpeedMultiplier(blockState);
                 }
             }
             int destSlot = mc.player.getInventory().selectedSlot;
@@ -94,9 +116,58 @@ public class AutoSwapTools {
         return 1;
     }
 
+    public static int RemoveEnchantFromBlacklist(Enchantment enchantment){
+        String enchantmentFormatted = enchantment.getTranslationKey().split("\\.")[2];
+        blacklistEnchantList = Utils.RemoveItemFromList(blacklistEnchantList, enchantmentFormatted);
+        Config.SaveListToConfig(blacklistEnchantList, "AutoSwapBlacklistEnchantList");
+        Utils.SendChatMessage(String.format("'%s' removed from the enchantment blacklist",enchantmentFormatted));
+        return 1;
+    }
+    public static int ToggleEnchantBlacklist() {
+        Config.ToggleBooleanValue("AutoSwapToolBlacklistEnabled","false");
+        Utils.SendChatMessage(String.format("§6Auto Swap Tool Blacklist has been toggled to §6%s", Config.GetValue("AutoSwapToolBlacklistEnabled", "true")));
+        return 1;
+    }
+    public static int AddEnchantToBlacklist(Enchantment enchantment) {
+        String enchantmentFormatted = enchantment.getTranslationKey().split("\\.")[2].strip();
+        blacklistEnchantList.add(enchantmentFormatted);
+        Config.SaveListToConfig(blacklistEnchantList, "AutoSwapBlacklistEnchantList");
+        Utils.SendChatMessage(String.format("'%s' added to the enchantment blacklist",enchantmentFormatted));
+        return 1;
+    }
+    public static int DisplayEnchantBlacklist() {
+        String toDisplay = "Current blacklisted enchants: ";
+        for (int i = 0; i < blacklistEnchantList.size(); i++) {
+            if(!blacklistEnchantList.get(i).equals("")) {
+                if(i+1 == blacklistEnchantList.size()) {
+                    toDisplay += String.format("%s", blacklistEnchantList.get(i));
+                }
+                else {
+                    toDisplay += String.format("%s,", blacklistEnchantList.get(i));
+                }
+            }
+        }
+        Utils.SendChatMessage(toDisplay);
+        return 1;
+    }
+
     public static void KeybindCheck(){
         if(AutoSwapTools.keybind.wasPressed()) {
             AutoSwapTools.Toggle();
         }
+    }
+
+    private static void LoadBlacklistFromConfig() {
+        String blacklistString = Config.GetValue("AutoSwapBlacklistEnchantList", "");
+        String[] enchants = blacklistString.split(",");
+        for (String enchant: enchants) {
+            if(!enchant.equals("")) {
+                blacklistEnchantList.add(enchant);
+            }
+        }
+    }
+
+    public static void Initialize(){
+        LoadBlacklistFromConfig();
     }
 }
