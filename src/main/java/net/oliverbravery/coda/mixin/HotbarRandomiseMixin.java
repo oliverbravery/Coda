@@ -2,7 +2,6 @@ package net.oliverbravery.coda.mixin;
 
 import net.oliverbravery.coda.features.SlotRandomiser;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
@@ -15,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Mixin(InGameHud.class)
-public abstract class HotbarRandomiseMixin extends DrawableHelper {
+public abstract class HotbarRandomiseMixin {
     @Unique
     private static PlayerInventory inventory;
     private static int delay = 1;

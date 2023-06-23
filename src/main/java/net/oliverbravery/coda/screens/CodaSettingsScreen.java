@@ -1,5 +1,6 @@
 package net.oliverbravery.coda.screens;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.gui.widget.ElementListWidget;
@@ -156,26 +157,21 @@ public class CodaSettingsScreen extends Screen {
         }).size(110, 20).position(width / 2 + 5, this.height / 4 + 140 + -16).build());
     }
 
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        this.fillGradient(matrices, 0, 0, this.width, this.height, 1114112000, 1677704500);
-        matrices.push();
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        context.fillGradient(0, 0, this.width, this.height, 1114112000, 1677704500);
+        this.renderBackground(context);
+        MatrixStack matrices = context.getMatrices();
         matrices.scale(2.0F, 2.0F, 2.0F);
         if(this.height >= 240 && this.height <= 475) {
-            drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2 / 2, 15, 16777215);
+            context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2 / 2, 15, 16777215);
         }
         else {
-            drawCenteredText(matrices, this.textRenderer, this.title, this.width / 2 / 2, 45, 16777215);
+            context.drawCenteredTextWithShadow(this.textRenderer, this.title, this.width / 2 / 2, 45, 16777215);
         }
-        matrices.pop();
-
-        matrices.push();
-        matrices.scale(0.75F, 0.75F, 0.75F);
-        drawCenteredText(matrices, this.textRenderer, Text.literal("Created by §2Oliver-Bravery"), (int) (this.width * 1.25) - 40, (int) (this.height * 1.25) - 1, 16777215);
-        matrices.pop();
-
-        super.render(matrices, mouseX, mouseY, delta);
+        matrices.scale(0.5F, 0.5F, 0.5F);
+        context.drawCenteredTextWithShadow(this.textRenderer, Text.literal("Created by §2Oliver-Bravery"), (int) (this.width * 1.25) - 40, (int) (this.height * 1.25) - 1, 16777215);
+        super.render(context, mouseX, mouseY, delta);
     }
-
 
     protected void init() {
         AddHotbarRandomizerButtons();

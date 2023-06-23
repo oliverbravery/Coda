@@ -1,5 +1,6 @@
 package net.oliverbravery.coda.screens;
 
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.ButtonWidget;
 import net.minecraft.client.option.GameOptions;
@@ -77,12 +78,11 @@ public class SlotRandomiserScreen extends Screen {
         }).size(140, 20).position(width / 2 - 70, this.height / 4 + 50 + -16).build());
     }
 
-    public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        matrices.push();
-        matrices.scale(0.75F, 0.75F, 0.75F);
-        drawCenteredText(matrices, this.textRenderer, Text.literal("Created by §2Oliver-Bravery"), (int) (this.width * 1.25) - 40, (int) (this.height * 1.25) - 1, 16777215);
-        matrices.pop();
-        super.render(matrices, mouseX, mouseY, delta);
+
+    public void render(DrawContext context, int mouseX, int mouseY, float delta) {
+        this.renderBackground(context);
+        context.drawCenteredTextWithShadow(this.textRenderer, Text.literal("Created by §2Oliver-Bravery"), (int) (this.width * 1.25) - 40, (int) (this.height * 1.25) - 1, 16777215);
+        super.render(context, mouseX, mouseY, delta);
     }
 
     protected void init() {
