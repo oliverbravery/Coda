@@ -159,7 +159,7 @@ public class CodaSettingsScreen extends Screen {
 
     public void render(DrawContext context, int mouseX, int mouseY, float delta) {
         context.fillGradient(0, 0, this.width, this.height, 1114112000, 1677704500);
-        this.renderBackground(context);
+        this.renderBackground(context, mouseX, mouseY, delta);
         MatrixStack matrices = context.getMatrices();
         matrices.scale(2.0F, 2.0F, 2.0F);
         if(this.height >= 240 && this.height <= 475) {
